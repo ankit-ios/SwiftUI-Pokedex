@@ -23,14 +23,14 @@ struct PokemonDetailView: View {
         ScrollView {
             VStack {
                 //Heading view
-                PokemonDetailHeadingView(pokemonDetail: pokemonDetail, pokemonSpices: $viewModel.pokemonSpicesModel)
+                PokemonDetailHeadingView(pokemonDetail: pokemonDetail, pokemonSpices: $viewModel.pokemonSpeciesModel)
                     .frame(height: 300)
                     .padding(.bottom)
                     
                 Spacer()
                 
                 //Pokeman Ability view
-                PokemanAbilityView(pokemonDetail: pokemonDetail, pokemonSpices: $viewModel.pokemonSpicesModel, pokemonTypeDetail: $viewModel.pokemonTypeDetailModel)
+                PokemanAbilityView(pokemonDetail: pokemonDetail, pokemonSpecies: $viewModel.pokemonSpeciesModel, pokemonTypeDetail: $viewModel.pokemonTypeDetailModel)
                     .frame(height: 320)
                     .padding(.bottom)
                 Spacer()
@@ -42,7 +42,7 @@ struct PokemonDetailView: View {
                 
                 Spacer()
                 
-                PokemanEvolutionChainView(pokemonDetail: pokemonDetail)
+                PokemanEvolutionChainView(pokemonDetail: pokemonDetail, pokemonEvolutionChainModel: $viewModel.pokemonEvolutionChainModel)
                     .frame(height: 320)
                     .padding(.bottom)
                 

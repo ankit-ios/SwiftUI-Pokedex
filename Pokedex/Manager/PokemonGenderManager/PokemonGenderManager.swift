@@ -33,7 +33,7 @@ class PokemonGenderManager {
         Publishers.MergeMany(requests)
             .sink(receiveCompletion: { _ in }) { [weak self] response in
                 if let gender = PokemonGender(rawValue: response.gender) {
-                    self?.genderDataSource[gender] = response.allSpices
+                    self?.genderDataSource[gender] = response.allSpecies
                 }
             }
             .store(in: &networkManager.cancellables)

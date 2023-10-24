@@ -10,7 +10,7 @@ import SwiftUI
 struct PokemanAbilityView: View {
     
     let pokemonDetail: PokemonDetail
-    @Binding var pokemonSpices: PokemonSpicesModel?
+    @Binding var pokemonSpecies: PokemonSpeciesModel?
     @Binding var pokemonTypeDetail: PokemonTypeDetailModel?
     
     
@@ -55,7 +55,7 @@ struct PokemanAbilityView: View {
                         
                         VStack(alignment: .leading, spacing: 2) {
                             Text("Egg Groups").fontWeight(.bold)
-                            Text(pokemonSpices?.getEggGroups().joined(separator: ", ") ?? "")
+                            Text(pokemonSpecies?.getEggGroups().joined(separator: ", ") ?? "")
                         }
                         .padding(.bottom)
                         
@@ -112,6 +112,6 @@ struct PokemanAbilityView: View {
 
 struct PokemanAbilityView_Previews: PreviewProvider {
     static var previews: some View {
-        PokemanAbilityView(pokemonDetail: .dummy, pokemonSpices: .constant(nil), pokemonTypeDetail: .constant(nil))
+        PokemanAbilityView(pokemonDetail: .dummy, pokemonSpecies: .constant(nil), pokemonTypeDetail: .constant(nil))
     }
 }

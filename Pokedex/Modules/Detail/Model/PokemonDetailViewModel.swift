@@ -10,7 +10,7 @@ import Combine
 
 class PokemonDetailViewModel: ObservableObject {
     
-    @Published var pokemonSpicesModel: PokemonSpicesModel?
+    @Published var pokemonSpeciesModel: PokemonSpeciesModel?
     @Published var pokemonTypeDetailModel: PokemonTypeDetailModel?
     @Published var pokemonEvolutionChainModel: PokemonEvolutionChainModel?
     
@@ -19,7 +19,7 @@ class PokemonDetailViewModel: ObservableObject {
     }
     
     func fetchPokemonData(pokemonId: Int, from networkManager: NetworkManager) {
-        let speciesRequest = networkManager.request(PokemonApi.species(pokemonId: pokemonId), responseType: PokemonSpices.self)
+        let speciesRequest = networkManager.request(PokemonApi.species(pokemonId: pokemonId), responseType: PokemonSpecies.self)
         let typeRequest = networkManager.request(PokemonApi.type(pokemonId: pokemonId), responseType: PokemonTypeDetail.self)
         let evolutionRequest = networkManager.request(PokemonApi.evolutionChain(pokemonId: pokemonId), responseType: PokemonEvolutionChain.self)
         
@@ -34,7 +34,7 @@ class PokemonDetailViewModel: ObservableObject {
                 }
             }) { [weak self] (speciesResponse, typeResponse, evolutionResponse) in
                 
-                self?.pokemonSpicesModel = PokemonSpicesModel(pokemonSpices: speciesResponse)
+                self?.pokemonSpeciesModel = PokemonSpeciesModel(pokemonSpecies: speciesResponse)
                 self?.pokemonTypeDetailModel = PokemonTypeDetailModel(pokemonTypeDetail: typeResponse)
                 self?.pokemonEvolutionChainModel = PokemonEvolutionChainModel(pokemonEvolutionChain: evolutionResponse)
             }
@@ -42,20 +42,20 @@ class PokemonDetailViewModel: ObservableObject {
     }
 }
 
-struct PokemonSpicesModel {
+struct PokemonSpeciesModel {
     
-    private let pokemonSpices: PokemonSpices
+    private let pokemonSpecies: PokemonSpecies
     
-    init(pokemonSpices: PokemonSpices) {
-        self.pokemonSpices = pokemonSpices
+    init(pokemonSpecies: PokemonSpecies) {
+        self.pokemonSpecies = pokemonSpecies
     }
     
     func getFlavorText() -> String {
-        pokemonSpices.flavorTextEntries?.filter { $0.language?.name == "en" }.first?.flavorText ?? ""
+        pokemonSpecies.flavorTextEntries?.filter { $0.language?.name == "en" }.first?.flavorText ?? ""
     }
     
     func getEggGroups() -> [String] {
-        pokemonSpices.eggGroup?.compactMap { $0.name } ?? []
+        pokemonSpecies.eggGroup?.compactMap { $0.name } ?? []
     }
 }
 

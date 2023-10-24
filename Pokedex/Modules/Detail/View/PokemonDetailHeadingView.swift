@@ -10,7 +10,7 @@ import SwiftUI
 struct PokemonDetailHeadingView: View {
     
     let pokemonDetail: PokemonDetail
-    @Binding var pokemonSpices: PokemonSpicesModel?
+    @Binding var pokemonSpices: PokemonSpeciesModel?
     @State private var isExpanded = false
     
     var gradientColors: [Color] {

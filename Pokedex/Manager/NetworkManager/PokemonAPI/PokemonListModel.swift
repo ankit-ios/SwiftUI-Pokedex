@@ -100,19 +100,19 @@ struct PokemonNameURL: Decodable {
 
 struct PokemonGenderResponse: Decodable {
     let gender: String
-    let spicesDetails: [PokemonGenderSpicesDetails]?
-    var allSpices: [String] {
-        spicesDetails?.compactMap { $0.pokemonSpecies?.name } ?? []
+    let speciesDetails: [PokemonGenderSpeciesDetails]?
+    var allSpecies: [String] {
+        speciesDetails?.compactMap { $0.pokemonSpecies?.name } ?? []
     }
     
     enum CodingKeys: String, CodingKey {
         case gender = "name"
-        case spicesDetails = "pokemon_species_details"
+        case speciesDetails = "pokemon_species_details"
     }
 }
 
 extension PokemonGenderResponse {
-    struct PokemonGenderSpicesDetails: Decodable {
+    struct PokemonGenderSpeciesDetails: Decodable {
         let pokemonSpecies: PokemonGenderSpecies?
         
         enum CodingKeys: String, CodingKey {
@@ -125,9 +125,9 @@ extension PokemonGenderResponse {
     }
 }
 
-//MARK: - Spices
+//MARK: - Species
 
-struct PokemonSpices: Decodable {
+struct PokemonSpecies: Decodable {
     let eggGroup: [PokemonNameURL]?
     let flavorTextEntries: [FlavorTextEntries]?
     
@@ -138,7 +138,7 @@ struct PokemonSpices: Decodable {
     }
 }
 
-extension PokemonSpices {
+extension PokemonSpecies {
     struct FlavorTextEntries: Decodable {
         let flavorText: String?
         let language: PokemonNameURL?
