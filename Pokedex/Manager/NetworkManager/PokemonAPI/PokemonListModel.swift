@@ -31,7 +31,7 @@ struct PokemonDetail: Decodable {
     let abilities: [PokemonAbility]
     let stats: [PokemonStats]
     
-    static let dummy: PokemonDetail = .init(id: 1, name: "bulbasaur", height: 122, weight: 233, sprites: .init(thumbnail: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png", other: .init(home: .init(frontImage: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png"))), types: [.init(slot: 1, type: .init(name: "grass", url: "https://pokeapi.co/api/v2/type/12/"))], abilities: [.init(isHidden: false, slot: 1, ability: .init(name: "shield-dust", url: "https://pokeapi.co/api/v2/ability/19/"))], stats: [])
+    static let dummy: PokemonDetail = .init(id: 1, name: "bulbasaur", height: 122, weight: 233, sprites: .init(thumbnail: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png", other: .init(home: .init(frontImage: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png"))), types: [.init(slot: 1, type: .init(name: "grass", url: "https://pokeapi.co/api/v2/type/12/"))], abilities: [.init(isHidden: false, slot: 1, ability: .init(name: "shield-dust", url: "https://pokeapi.co/api/v2/ability/19/"))], stats: [.init(baseStat: 30, effort: 1, stat: .init(name: "HP", url: nil)), .init(baseStat: 40, effort: 1, stat: .init(name: "special-defense", url: nil)), .init(baseStat: 70, effort: 1, stat: .init(name: "special-attack", url: nil))])
 }
 
 
@@ -173,6 +173,47 @@ extension PokemonTypeDetail {
             case halfDamageFrom = "half_damage_from"
             case doubleDamageTo = "double_damage_to"
             case halfDamageTo = "half_damage_to"
+        }
+    }
+}
+
+//MARK: - EvolutionChain
+
+struct PokemonEvolutionChain: Decodable {
+    
+    let babyTriggerItem: String?
+    let chain: Chain?
+    let id: Int?
+    
+    private enum CodingKeys: String, CodingKey {
+        case babyTriggerItem = "baby_trigger_item"
+        case chain
+        case id
+    }
+}
+
+extension PokemonEvolutionChain {
+    struct Chain: Decodable {
+        let evolutionDetails: [EvolutionDetails]?
+        let evolvesTo: [Chain]?
+        let isBaby: Bool?
+        let species: PokemonNameURL?
+        
+        private enum CodingKeys: String, CodingKey {
+            case evolutionDetails = "evolution_details"
+            case evolvesTo = "evolves_to"
+            case isBaby = "is_baby"
+            case species
+        }
+    }
+    
+    struct EvolutionDetails: Decodable {
+        let minLevel: Int?
+        let gender: String?
+        
+        private enum CodingKeys: String, CodingKey {
+            case minLevel = "min_level"
+            case gender = "gender"
         }
     }
 }

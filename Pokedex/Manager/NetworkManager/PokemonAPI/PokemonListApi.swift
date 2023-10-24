@@ -9,18 +9,20 @@ import Foundation
 
 enum PokemonApi: APIRequest {
     case list(offset: Int, limit: Int)
-    case detail(id: Int)
+    case detail(pokemonId: Int)
     case gender(type: String)
-    case species(id: Int)
-    case type(id: Int)
+    case species(pokemonId: Int)
+    case type(pokemonId: Int)
+    case evolutionChain(pokemonId: Int)
     
     var endpoint: String {
         switch self {
         case .list: return "/pokemon"
-        case .detail(let id): return "/pokemon/\(id)"
+        case .detail(let pokemonId): return "/pokemon/\(pokemonId)"
         case .gender(let type): return "/gender/\(type)"
-        case .species(let id): return "/pokemon-species/\(id)"
-        case .type(let id): return "/type/\(id)"
+        case .species(let pokemonId): return "/pokemon-species/\(pokemonId)"
+        case .type(let pokemonId): return "/type/\(pokemonId)"
+        case .evolutionChain(let pokemonId): return "/evolution-chain/\(pokemonId)"
         }
     }
     

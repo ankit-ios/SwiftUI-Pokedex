@@ -12,20 +12,31 @@ class PokemonDetailViewModel: ObservableObject {
     
     @Published var pokemonSpicesModel: PokemonSpicesModel?
     @Published var pokemonTypeDetailModel: PokemonTypeDetailModel?
-    
+    @Published var pokemonEvolutionChainModel: PokemonEvolutionChainModel?
     
     init() {
         
     }
     
-    func fetchPokemonData(for id: Int, from networkManager: NetworkManager) {
-        let speciesRequest = networkManager.request(PokemonApi.species(id: id), responseType: PokemonSpices.self)
-        let typeRequest = networkManager.request(PokemonApi.type(id: id), responseType: PokemonTypeDetail.self)
+    func fetchPokemonData(pokemonId: Int, from networkManager: NetworkManager) {
+        let speciesRequest = networkManager.request(PokemonApi.species(pokemonId: pokemonId), responseType: PokemonSpices.self)
+        let typeRequest = networkManager.request(PokemonApi.type(pokemonId: pokemonId), responseType: PokemonTypeDetail.self)
+        let evolutionRequest = networkManager.request(PokemonApi.evolutionChain(pokemonId: pokemonId), responseType: PokemonEvolutionChain.self)
         
-        Publishers.Zip(speciesRequest, typeRequest)
-            .sink(receiveCompletion: { _ in }) { [weak self] speciesResponse, typeResponse in
+        Publishers.Zip3(speciesRequest, typeRequest, evolutionRequest)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    print("API Request finished.")
+                case .failure(let error):
+                    // An error occurred in one of the requests.
+                    print("API Request Error: \(error)")
+                }
+            }) { [weak self] (speciesResponse, typeResponse, evolutionResponse) in
+                
                 self?.pokemonSpicesModel = PokemonSpicesModel(pokemonSpices: speciesResponse)
                 self?.pokemonTypeDetailModel = PokemonTypeDetailModel(pokemonTypeDetail: typeResponse)
+                self?.pokemonEvolutionChainModel = PokemonEvolutionChainModel(pokemonEvolutionChain: evolutionResponse)
             }
             .store(in: &networkManager.cancellables)
     }
@@ -88,5 +99,13 @@ struct PokemonStatsModel {
         }
         
         return statsArray
+    }
+}
+
+struct PokemonEvolutionChainModel {
+    private let pokemonEvolutionChain: PokemonEvolutionChain
+    
+    init(pokemonEvolutionChain: PokemonEvolutionChain) {
+        self.pokemonEvolutionChain = pokemonEvolutionChain
     }
 }

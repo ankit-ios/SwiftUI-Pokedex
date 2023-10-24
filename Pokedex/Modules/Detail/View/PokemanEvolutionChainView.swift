@@ -11,6 +11,7 @@ struct PokemanEvolutionChainView: View {
     
     let imageURL = "https://mcdn.wallpapersafari.com/medium/80/94/3kEq8V.jpeg"
     let pokemonDetail: PokemonDetail
+    @Binding var pokemonEvolutionChainModel: PokemonEvolutionChainModel?
 
 
     var body: some View {
@@ -107,6 +108,6 @@ struct PokemanEvolutionChainView: View {
 
 struct PokemanEvolutionChainView_Previews: PreviewProvider {
     static var previews: some View {
-        PokemanEvolutionChainView(pokemonDetail: .dummy)
+        PokemanEvolutionChainView(pokemonDetail: .dummy, pokemonEvolutionChainModel: .constant(nil))
     }
 }

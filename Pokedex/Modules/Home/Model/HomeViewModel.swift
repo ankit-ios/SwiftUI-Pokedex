@@ -76,7 +76,7 @@ class HomeViewModel: ObservableObject {
         guard !pokemonsDetail.contains(where: {$0.key.name == item.name}),
               let id = getId(from: item.url) else { return }
         
-        networkManager.request(PokemonApi.detail(id: id), responseType: PokemonDetail.self)
+        networkManager.request(PokemonApi.detail(pokemonId: id), responseType: PokemonDetail.self)
             .sink(receiveCompletion: { _ in }) { detail in
                 print(detail)
                 self.pokemonsDetail[item] = detail

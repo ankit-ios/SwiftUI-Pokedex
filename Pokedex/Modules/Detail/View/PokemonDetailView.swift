@@ -26,9 +26,7 @@ struct PokemonDetailView: View {
                 PokemonDetailHeadingView(pokemonDetail: pokemonDetail, pokemonSpices: $viewModel.pokemonSpicesModel)
                     .frame(height: 300)
                     .padding(.bottom)
-                    .onAppear {
-                        viewModel.fetchPokemonData(for: pokemonDetail.id, from: networkManager)
-                    }
+                    
                 Spacer()
                 
                 //Pokeman Ability view
@@ -37,12 +35,11 @@ struct PokemonDetailView: View {
                     .padding(.bottom)
                 Spacer()
                 
-                //Pokeman Ability view
-                PokemanStateView(statsModel: PokemonStatsModel(pokemonDetail: pokemonDetail))
-//                    .frame(height: 320)
-                    .frame(minHeight: 700, idealHeight: nil, maxHeight: .infinity, alignment: .top)
-
+                //Pokeman State view
+                PokemanStatsView(statsModel: PokemonStatsModel(pokemonDetail: pokemonDetail))
+                    .frame(minHeight: 200, maxHeight: .infinity, alignment: .leading)
                     .padding(.bottom)
+                
                 Spacer()
                 
                 PokemanEvolutionChainView(pokemonDetail: pokemonDetail)
@@ -50,6 +47,9 @@ struct PokemonDetailView: View {
                     .padding(.bottom)
                 
             } //Outer VStack
+            .onAppear {
+                viewModel.fetchPokemonData(pokemonId: pokemonDetail.id, from: networkManager)
+            }
             .padding()
         }
         .background(Color(hex: "#DEEDED"))

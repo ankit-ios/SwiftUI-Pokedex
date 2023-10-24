@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct PokemanAbilityView: View {
-        
+    
     let pokemonDetail: PokemonDetail
     @Binding var pokemonSpices: PokemonSpicesModel?
     @Binding var pokemonTypeDetail: PokemonTypeDetailModel?
-
+    
     
     var body: some View {
         GeometryReader { geometry in
@@ -20,19 +20,19 @@ struct PokemanAbilityView: View {
             VStack(alignment: .leading) {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading) {
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 2) {
                             Text("Height").fontWeight(.bold)
                             Text("\(pokemonDetail.height)")
                         }
                         .padding(.bottom)
                         
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 2) {
                             Text("Gender(s)").fontWeight(.bold)
                             Text("\(PokemonGenderManager.shared.getGender(for: pokemonDetail.name ?? ""))")
                         }
                         .padding(.bottom)
                         
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 4) {
                             Text("Abilities").fontWeight(.bold)
                             
                             let abilitiesArr = pokemonDetail.abilities
@@ -47,13 +47,13 @@ struct PokemanAbilityView: View {
                     
                     VStack(alignment: .leading) {
                         
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 2) {
                             Text("Weight").fontWeight(.bold)
                             Text("\(pokemonDetail.weight)")
                         }
                         .padding(.bottom)
                         
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 2) {
                             Text("Egg Groups").fontWeight(.bold)
                             Text(pokemonSpices?.getEggGroups().joined(separator: ", ") ?? "")
                         }
@@ -75,7 +75,7 @@ struct PokemanAbilityView: View {
                                                 RoundedRectangle(cornerRadius: 6)
                                                     .stroke(Color.black, lineWidth: 1)
                                             )
-                                    }
+                                    }.padding(.horizontal, 1)
                                 }
                             }
                         }
@@ -100,7 +100,7 @@ struct PokemanAbilityView: View {
                                         RoundedRectangle(cornerRadius: 6)
                                             .stroke(Color.black, lineWidth: 1)
                                     )
-                            }
+                            }.padding(.horizontal, 1)
                         }
                     }
                     .frame(height: 30)
