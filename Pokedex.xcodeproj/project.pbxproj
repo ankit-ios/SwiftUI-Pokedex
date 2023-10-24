@@ -72,6 +72,7 @@
 		AD13FA2C2AE65923009DF988 /* CustomDisclosureGroupStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDisclosureGroupStyle.swift; sourceTree = "<group>"; };
 		AD13FA2E2AE65943009DF988 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		AD13FA302AE6B107009DF988 /* PokemanAbilityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemanAbilityViewModel.swift; sourceTree = "<group>"; };
+		AD13FA322AE7CFFE009DF988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ADC8C9622AE2A8B700041BAC /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		ADC8C9642AE2A95E00041BAC /* PokemonDetailHeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailHeadingView.swift; sourceTree = "<group>"; };
 		ADC8C9662AE2A97900041BAC /* PokemanEvolutionChainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemanEvolutionChainView.swift; sourceTree = "<group>"; };
@@ -201,6 +202,7 @@
 				ADEAB4592AE268CF00E81FCE /* UIComponent */,
 				ADEAB4282AE17A9100E81FCE /* PokedexApp.swift */,
 				ADEAB42C2AE17A9200E81FCE /* Assets.xcassets */,
+				AD13FA322AE7CFFE009DF988 /* Info.plist */,
 				ADEAB42E2AE17A9200E81FCE /* Preview Content */,
 			);
 			path = Pokedex;
@@ -663,9 +665,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Pokedex/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Pokedex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -691,9 +693,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Pokedex/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Pokedex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
