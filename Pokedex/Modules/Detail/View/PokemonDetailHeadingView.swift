@@ -9,9 +9,10 @@ import SwiftUI
 
 struct PokemonDetailHeadingView: View {
     
-    let detailText = "Obviously prefers\nhot places. When\nit rains, steam\nis said to spout\nfrom the tip of\nits tail."
-    @State private var isExpanded = false
     let pokemonDetail: PokemonDetail
+    @Binding var pokemonSpices: PokemonSpicesModel?
+    @State private var isExpanded = false
+    
     var gradientColors: [Color] {
         let types = pokemonDetail.types
         let name = types.map { (PokemonType(rawValue: $0.type?.name ?? "normal") ?? PokemonType.water).actionColorHex }
@@ -47,7 +48,7 @@ struct PokemonDetailHeadingView: View {
                 .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 2)
 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(detailText)
+                    Text(pokemonSpices?.getFlavorText() ?? "")
                         .multilineTextAlignment(.leading)
                         .lineLimit(isExpanded ? nil : 2)
                     
@@ -67,7 +68,7 @@ struct PokemonDetailHeadingView: View {
 
 struct PokemonDetailHeadingView_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonDetailHeadingView(pokemonDetail: .dummy)
+        PokemonDetailHeadingView(pokemonDetail: .dummy, pokemonSpices: .constant(nil))
     }
 }
 

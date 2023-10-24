@@ -28,8 +28,35 @@ struct PokemonDetail: Decodable {
     let weight: Int
     let sprites: PokemonSprites
     let types: [PokemonTypes]
+    let abilities: [PokemonAbility]
+    let stats: [PokemonStats]
     
-    static let dummy: PokemonDetail = .init(id: 1, name: "", height: 122, weight: 233, sprites: .init(thumbnail: nil, other: .init(home: .init(frontImage: nil))), types: [])
+    static let dummy: PokemonDetail = .init(id: 1, name: "bulbasaur", height: 122, weight: 233, sprites: .init(thumbnail: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png", other: .init(home: .init(frontImage: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png"))), types: [.init(slot: 1, type: .init(name: "grass", url: "https://pokeapi.co/api/v2/type/12/"))], abilities: [.init(isHidden: false, slot: 1, ability: .init(name: "shield-dust", url: "https://pokeapi.co/api/v2/ability/19/"))], stats: [])
+}
+
+
+struct PokemonStats: Decodable {
+    let baseStat: Int?
+    let effort: Int?
+    let stat: PokemonNameURL?
+    
+    enum CodingKeys: String, CodingKey {
+        case baseStat = "base_stat"
+        case effort
+        case stat
+    }
+}
+
+struct PokemonAbility: Decodable {
+    let isHidden: Bool?
+    let slot: Int?
+    let ability: PokemonNameURL?
+    
+    enum CodingKeys: String, CodingKey {
+        case isHidden = "is_hidden"
+        case slot
+        case ability
+    }
 }
 
 struct PokemonSprites: Decodable {
@@ -60,10 +87,10 @@ extension PokemonSprites {
 
 struct PokemonTypes: Decodable {
     let slot: Int
-    let type: PokemonName?
+    let type: PokemonNameURL?
 }
 
-struct PokemonName: Decodable {
+struct PokemonNameURL: Decodable {
     let name: String?
     let url: String?
 }
@@ -98,3 +125,54 @@ extension PokemonGenderResponse {
     }
 }
 
+//MARK: - Spices
+
+struct PokemonSpices: Decodable {
+    let eggGroup: [PokemonNameURL]?
+    let flavorTextEntries: [FlavorTextEntries]?
+    
+    
+    enum CodingKeys: String, CodingKey {
+        case eggGroup = "egg_groups"
+        case flavorTextEntries = "flavor_text_entries"
+    }
+}
+
+extension PokemonSpices {
+    struct FlavorTextEntries: Decodable {
+        let flavorText: String?
+        let language: PokemonNameURL?
+        
+        enum CodingKeys: String, CodingKey {
+            case flavorText = "flavor_text"
+            case language
+        }
+    }
+}
+
+//MARK: - Type
+
+struct PokemonTypeDetail: Decodable {
+    
+    let damageRelations: DamageRelations?
+    
+    enum CodingKeys: String, CodingKey {
+        case damageRelations = "damage_relations"
+    }
+}
+
+extension PokemonTypeDetail {
+    struct DamageRelations: Decodable {
+        let doubleDamageFrom: [PokemonNameURL]?
+        let halfDamageFrom: [PokemonNameURL]?
+        let doubleDamageTo: [PokemonNameURL]?
+        let halfDamageTo: [PokemonNameURL]?
+        
+        enum CodingKeys: String, CodingKey {
+            case doubleDamageFrom = "double_damage_from"
+            case halfDamageFrom = "half_damage_from"
+            case doubleDamageTo = "double_damage_to"
+            case halfDamageTo = "half_damage_to"
+        }
+    }
+}

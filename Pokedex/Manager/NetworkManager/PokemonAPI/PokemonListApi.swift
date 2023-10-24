@@ -12,6 +12,7 @@ enum PokemonApi: APIRequest {
     case detail(id: Int)
     case gender(type: String)
     case species(id: Int)
+    case type(id: Int)
     
     var endpoint: String {
         switch self {
@@ -19,6 +20,7 @@ enum PokemonApi: APIRequest {
         case .detail(let id): return "/pokemon/\(id)"
         case .gender(let type): return "/gender/\(type)"
         case .species(let id): return "/pokemon-species/\(id)"
+        case .type(let id): return "/type/\(id)"
         }
     }
     

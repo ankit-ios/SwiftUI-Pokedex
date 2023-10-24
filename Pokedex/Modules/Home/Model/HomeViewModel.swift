@@ -62,7 +62,6 @@ class HomeViewModel: ObservableObject {
             
             networkManager.request(PokemonApi.list(offset: self.offset, limit: self.limit), responseType: PokemonListResponse.self)
                 .sink(receiveCompletion: { _ in }) { newData in
-                    //                  print(newData)
                     self.allPokemons.append(contentsOf: newData.results)
                     self.offset += 20
                     self.performSearch()
@@ -70,7 +69,7 @@ class HomeViewModel: ObservableObject {
                 }
                 .store(in: &networkManager.cancellables)
         }
-      }
+    }
     
     func fetchPokemonItemImage(_ item: PokemonItem, from networkManager: NetworkManager) {
         

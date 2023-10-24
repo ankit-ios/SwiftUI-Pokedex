@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct PokemanAbilityView: View {
-    
-    let eggGroup = "bug"
-    let abilities = ["swarm, sniper"]
-    let types = ["bug", "poison"]
-    let weekAgainst = ["fire", "rock", "ground", "psychic", "flying"]
+        
     let pokemonDetail: PokemonDetail
+    @Binding var pokemonSpices: PokemonSpicesModel?
+    @Binding var pokemonTypeDetail: PokemonTypeDetailModel?
 
     
     var body: some View {
@@ -36,13 +34,16 @@ struct PokemanAbilityView: View {
                         
                         VStack(alignment: .leading) {
                             Text("Abilities").fontWeight(.bold)
-                            let abilitiesArr = abilities.joined(separator: ", ")
+                            
+                            let abilitiesArr = pokemonDetail.abilities
+                                .compactMap { $0.ability?.name }
+                                .joined(separator: ", ")
                             Text("\(abilitiesArr)")
                         }
                         .padding(.bottom)
                         
                     }
-                    .frame(width: geometry.size.width * 0.4)
+                    .frame(width: geometry.size.width * 0.5)
                     
                     VStack(alignment: .leading) {
                         
@@ -52,47 +53,57 @@ struct PokemanAbilityView: View {
                         }
                         .padding(.bottom)
                         
-                        
                         VStack(alignment: .leading) {
                             Text("Egg Groups").fontWeight(.bold)
-                            Text(eggGroup)
+                            Text(pokemonSpices?.getEggGroups().joined(separator: ", ") ?? "")
                         }
                         .padding(.bottom)
                         
                         
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 0) {
                             Text("Types").fontWeight(.bold)
                             ScrollView(.horizontal, showsIndicators: true) {
-                                LazyHGrid(rows: [GridItem(.adaptive(minimum: 40))]) {
+                                let types = pokemonDetail.types.compactMap { $0.type?.name }
+                                LazyHGrid(rows: [GridItem(.adaptive(minimum: 20))]) {
                                     ForEach(types, id: \.self) { item in
                                         Text(item)
-                                            .padding(.horizontal, 8)
-                                            .background(.blue)
-                                            .foregroundColor(.white)
+                                            .padding(.init(top: 2, leading: 8, bottom: 2, trailing: 8))
+                                            .background(Color(hex: (PokemonType(rawValue: item) ?? .normal).actionColorHex))
+                                            .foregroundColor(.black)
                                             .cornerRadius(6)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 6)
+                                                    .stroke(Color.black, lineWidth: 1)
+                                            )
                                     }
                                 }
                             }
                         }
-                        .frame(height: 70)
+                        .frame(height: 50)
                         .padding(.bottom)
                     }
-                    .frame(width: geometry.size.width * 0.4)
+                    .frame(width: geometry.size.width * 0.5)
                 }
                 
-                VStack() {
+                VStack(alignment: .leading) {
                     Text("Week Against").fontWeight(.bold)
                     ScrollView(.horizontal, showsIndicators: true) {
-                        LazyHGrid(rows: [GridItem(.adaptive(minimum: 40))]) {
+                        LazyHGrid(rows: [GridItem(.adaptive(minimum: 20))]) {
+                            let weekAgainst = pokemonTypeDetail?.getPokemenWeakAgainst() ?? []
                             ForEach(weekAgainst, id: \.self) { item in
                                 Text(item)
-                                    .padding(.horizontal, 8)
-                                    .background(.blue)
-                                    .foregroundColor(.white)
+                                    .padding(.init(top: 2, leading: 8, bottom: 2, trailing: 8))
+                                    .background(Color(hex: (PokemonType(rawValue: item) ?? .normal).actionColorHex))
+                                    .foregroundColor(.black)
                                     .cornerRadius(6)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 6)
+                                            .stroke(Color.black, lineWidth: 1)
+                                    )
                             }
                         }
                     }
+                    .frame(height: 30)
                 }.padding()
             }
         }
@@ -101,6 +112,6 @@ struct PokemanAbilityView: View {
 
 struct PokemanAbilityView_Previews: PreviewProvider {
     static var previews: some View {
-        PokemanAbilityView(pokemonDetail: .dummy)
+        PokemanAbilityView(pokemonDetail: .dummy, pokemonSpices: .constant(nil), pokemonTypeDetail: .constant(nil))
     }
 }
