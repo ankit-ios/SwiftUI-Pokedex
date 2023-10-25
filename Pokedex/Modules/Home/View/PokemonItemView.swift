@@ -10,11 +10,6 @@ import SwiftUI
 struct PokemonItemView: View {
     let pokemon: PokemonItem
     let pokemonDetail: PokemonDetail
-    var gradientColors: [Color] {
-        let types = pokemonDetail.types
-        let name = types.map { (PokemonType(rawValue: $0.type?.name ?? "normal") ?? PokemonType.water).actionColorHex }
-        return name.map { Color(hex: $0) }
-    }
     
     var body: some View {
         
@@ -32,7 +27,7 @@ struct PokemonItemView: View {
             } placeholder: {
                 ProgressView()
             }
-            .addGradient(colors: gradientColors)
+            .addGradient(colors: pokemonDetail.gradientColors)
         }
     }
 }

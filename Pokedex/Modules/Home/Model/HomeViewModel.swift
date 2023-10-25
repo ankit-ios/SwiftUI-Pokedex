@@ -12,7 +12,7 @@ class HomeViewModel: ObservableObject {
     
     @Published var allPokemons: [PokemonItem] = []
     @Published var filteredPokemons: [PokemonItem] = []
-    @Published var pokemonsDetail: [PokemonItem: PokemonDetail] = [:]
+    @Published var pokemonsDetails: [PokemonItem: PokemonDetail] = [:]
     @Published var searchQuery: String = ""
     
     private var cancellable: AnyCancellable?
@@ -73,13 +73,13 @@ class HomeViewModel: ObservableObject {
     
     func fetchPokemonItemImage(_ item: PokemonItem, from networkManager: NetworkManager) {
         
-        guard !pokemonsDetail.contains(where: {$0.key.name == item.name}),
+        guard !pokemonsDetails.contains(where: {$0.key.name == item.name}),
               let id = getId(from: item.url) else { return }
         
         networkManager.request(PokemonApi.detail(pokemonId: id), responseType: PokemonDetail.self)
             .sink(receiveCompletion: { _ in }) { detail in
                 print(detail)
-                self.pokemonsDetail[item] = detail
+                self.pokemonsDetails[item] = detail
                 if let index = self.allPokemons.firstIndex (where: { $0.name == item.name }) {
                     self.allPokemons[index].thumbnail = detail.sprites.thumbnail
                 }
@@ -96,7 +96,7 @@ class HomeViewModel: ObservableObject {
     }
     
     func getPokemonDetail(for item: PokemonItem) -> PokemonDetail? {
-        pokemonsDetail.first(where: { $0.key.name == item.name })?.value
+        pokemonsDetails.first(where: { $0.key.name == item.name })?.value
     }
     
     func hasReachedEnd(of item: PokemonItem) -> Bool {

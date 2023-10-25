@@ -13,40 +13,14 @@ struct PokemonDetailHeadingView: View {
     @Binding var pokemonSpices: PokemonSpeciesModel?
     @State private var isExpanded = false
     
-    var gradientColors: [Color] {
-        let types = pokemonDetail.types
-        let name = types.map { (PokemonType(rawValue: $0.type?.name ?? "normal") ?? PokemonType.water).actionColorHex }
-        return name.map { Color(hex: $0) }
-    }
-    
     
     var body: some View {
         GeometryReader { geometry in
             HStack (alignment: .center, spacing: 20) {
                 
-                AsyncImage(url: (URL(string: pokemonDetail.sprites.actualImage ?? ""))) { phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView()
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .frame(width: geometry.size.width*0.4, alignment: .center)
-                            .aspectRatio(contentMode: .fit)
-                    case .failure:
-                        Image(systemName: "photo")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                    @unknown default:
-                        EmptyView()
-                    }
-                }
-                .addGradient(colors: gradientColors)
-                .frame(width: geometry.size.width*0.4, height: geometry.size.height)
-                .dottedBorder(color: .black, lineWidth: 1, dash: [5, 5], cornerRadius: 12)
-                .cornerRadius(12)
-                .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 2)
-
+                ImageViewWithGradient.init(imageURL: pokemonDetail.sprites.actualImage ?? "", gradientColors: pokemonDetail.gradientColors)
+                    .frame(width: geometry.size.width*0.4, height: geometry.size.height)
+                
                 VStack(alignment: .leading, spacing: 10) {
                     Text(pokemonSpices?.getFlavorText() ?? "")
                         .multilineTextAlignment(.leading)

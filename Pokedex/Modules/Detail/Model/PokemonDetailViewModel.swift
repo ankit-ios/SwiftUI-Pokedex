@@ -13,9 +13,18 @@ class PokemonDetailViewModel: ObservableObject {
     @Published var pokemonSpeciesModel: PokemonSpeciesModel?
     @Published var pokemonTypeDetailModel: PokemonTypeDetailModel?
     @Published var pokemonEvolutionChainModel: PokemonEvolutionChainModel?
+    @Published var pokemonEvolutionChainList: [PokemonEvolutionChainItem]?
+    @Published var pokemonEvolutionChainItemList: [PokemonEvolutionChainItem]?
     
-    init() {
-        
+    
+    let pokemonDetail: PokemonDetail
+    
+    private let dispatchGroup = DispatchGroup()
+    private var chainDetailList: [PokemonDetail] = []
+    
+    
+    init(pokemonDetail: PokemonDetail) {
+        self.pokemonDetail = pokemonDetail
     }
     
     func fetchPokemonData(pokemonId: Int, from networkManager: NetworkManager) {
@@ -36,9 +45,46 @@ class PokemonDetailViewModel: ObservableObject {
                 
                 self?.pokemonSpeciesModel = PokemonSpeciesModel(pokemonSpecies: speciesResponse)
                 self?.pokemonTypeDetailModel = PokemonTypeDetailModel(pokemonTypeDetail: typeResponse)
-                self?.pokemonEvolutionChainModel = PokemonEvolutionChainModel(pokemonEvolutionChain: evolutionResponse)
+                let evolutionChainModel = PokemonEvolutionChainModel(pokemonEvolutionChain: evolutionResponse)
+                self?.pokemonEvolutionChainModel = evolutionChainModel
+                self?.fetchPokemonEvolutionChainList(for: evolutionChainModel, from: networkManager)
             }
             .store(in: &networkManager.cancellables)
+    }
+    
+    func fetchPokemonEvolutionChainList(for pokeman: PokemonEvolutionChainModel?, from networkManager: NetworkManager) {
+        if let species = pokeman?.getAllSpecies() {
+            species.forEach { pokeman in
+                fetchPokemonEvolutionChainDetail(for: pokeman, from: networkManager)
+            }
+            
+            dispatchGroup.notify(queue: .main) { [weak self] in
+                self?.pokemonEvolutionChainItemList = self?.chainDetailList.map {
+                    PokemonEvolutionChainItem.init(id: $0.id, name: $0.name, imageUrl: $0.sprites.thumbnail, gradientColors: $0.gradientColors)
+                } ?? []
+            }
+        }
+    }
+    
+    
+    func fetchPokemonEvolutionChainDetail(for pokeman: PokemonNameURL, from networkManager: NetworkManager) {
+        dispatchGroup.enter()
+        
+        networkManager.request(PokemonApi.detail(pokemonId: pokeman.name ?? ""), responseType: PokemonDetail.self)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    print("API Request finished.")
+                case .failure(let error):
+                    // An error occurred in one of the requests.
+                    print("API Request Error: \(error)")
+                }
+            }) { [weak self] (response) in
+                self?.chainDetailList.append(response)
+                self?.dispatchGroup.leave()
+            }
+            .store(in: &networkManager.cancellables)
+        
     }
 }
 
@@ -107,5 +153,33 @@ struct PokemonEvolutionChainModel {
     
     init(pokemonEvolutionChain: PokemonEvolutionChain) {
         self.pokemonEvolutionChain = pokemonEvolutionChain
+        
+        
+    }
+    
+    func getAllSpecies() -> [PokemonNameURL] {
+        var allSpecies: [PokemonNameURL] = []
+        
+        guard let chain = self.pokemonEvolutionChain.chain,
+              let firstSpecies = chain.species else { return allSpecies }
+        allSpecies.append(firstSpecies)
+        
+        guard let secondChain = chain.evolvesTo?.first,
+              let secondSpecies = secondChain.species else { return allSpecies }
+        allSpecies.append(secondSpecies)
+        
+        guard let thirdChain = secondChain.evolvesTo?.first,
+              let thirdSpecies = thirdChain.species else { return allSpecies }
+        allSpecies.append(thirdSpecies)
+        
+        return allSpecies
     }
 }
+
+struct PokemonEvolutionChainItem: Hashable, Identifiable {
+    var id: Int
+    var name: String?
+    var imageUrl: String?
+    var gradientColors: [Color]
+}
+ 

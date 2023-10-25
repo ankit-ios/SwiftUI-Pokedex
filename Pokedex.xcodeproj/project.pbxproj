@@ -12,6 +12,7 @@
 		AD0AD6D22AE3FB0A0052F625 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0AD6D12AE3FB0A0052F625 /* APIRequest.swift */; };
 		AD0AD6D52AE3FB650052F625 /* PokemonListApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0AD6D42AE3FB650052F625 /* PokemonListApi.swift */; };
 		AD0AD6DB2AE3FC7A0052F625 /* PokemonListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0AD6DA2AE3FC7A0052F625 /* PokemonListModel.swift */; };
+		AD0B87122AE8F4E30002020C /* ImageViewWithGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0B87112AE8F4E30002020C /* ImageViewWithGradient.swift */; };
 		AD13FA1F2AE51B63009DF988 /* Pokemon+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD13FA1E2AE51B63009DF988 /* Pokemon+Extensions.swift */; };
 		AD13FA222AE52B8D009DF988 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD13FA212AE52B8D009DF988 /* ThemeManager.swift */; };
 		AD13FA252AE56868009DF988 /* PokemonGenderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD13FA242AE56868009DF988 /* PokemonGenderManager.swift */; };
@@ -63,6 +64,7 @@
 		AD0AD6D12AE3FB0A0052F625 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		AD0AD6D42AE3FB650052F625 /* PokemonListApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListApi.swift; sourceTree = "<group>"; };
 		AD0AD6DA2AE3FC7A0052F625 /* PokemonListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListModel.swift; sourceTree = "<group>"; };
+		AD0B87112AE8F4E30002020C /* ImageViewWithGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewWithGradient.swift; sourceTree = "<group>"; };
 		AD13FA1E2AE51B63009DF988 /* Pokemon+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pokemon+Extensions.swift"; sourceTree = "<group>"; };
 		AD13FA212AE52B8D009DF988 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		AD13FA242AE56868009DF988 /* PokemonGenderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonGenderManager.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				AD13FA2C2AE65923009DF988 /* CustomDisclosureGroupStyle.swift */,
 				AD13FA2E2AE65943009DF988 /* Checkbox.swift */,
 				AD13FA282AE63BC9009DF988 /* AccordionView.swift */,
+				AD0B87112AE8F4E30002020C /* ImageViewWithGradient.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				AD13FA2B2AE6426F009DF988 /* AccordianModel.swift in Sources */,
 				AD13FA2F2AE65943009DF988 /* Checkbox.swift in Sources */,
 				AD13FA252AE56868009DF988 /* PokemonGenderManager.swift in Sources */,
+				AD0B87122AE8F4E30002020C /* ImageViewWithGradient.swift in Sources */,
 				ADEAB4652AE2722200E81FCE /* PokemonItemView.swift in Sources */,
 				ADEAB4292AE17A9100E81FCE /* PokedexApp.swift in Sources */,
 				AD13FA312AE6B107009DF988 /* PokemanAbilityViewModel.swift in Sources */,

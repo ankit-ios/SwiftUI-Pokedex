@@ -7,9 +7,23 @@
 
 import Foundation
 
+
+extension String {
+    
+    static func convertAnyToString(_ value: Any) -> String? {
+        if let stringValue = value as? String {
+            return stringValue
+        } else if let intValue = value as? Int {
+            return "\(intValue)"
+        } else {
+            return nil
+        }
+    }
+}
+
 enum PokemonApi: APIRequest {
     case list(offset: Int, limit: Int)
-    case detail(pokemonId: Int)
+    case detail(pokemonId: Any) ///`id` can be String or Int
     case gender(type: String)
     case species(pokemonId: Int)
     case type(pokemonId: Int)
@@ -18,7 +32,7 @@ enum PokemonApi: APIRequest {
     var endpoint: String {
         switch self {
         case .list: return "/pokemon"
-        case .detail(let pokemonId): return "/pokemon/\(pokemonId)"
+        case .detail(let pokemonId): return "/pokemon/\(String.convertAnyToString(pokemonId) ?? "")"
         case .gender(let type): return "/gender/\(type)"
         case .species(let pokemonId): return "/pokemon-species/\(pokemonId)"
         case .type(let pokemonId): return "/type/\(pokemonId)"

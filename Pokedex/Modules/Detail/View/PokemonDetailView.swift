@@ -15,9 +15,17 @@ struct PokemonDetailView: View {
     let pokemonDetail: PokemonDetail
     
     @Binding var isPokemonDetailPresented: Bool
-    @StateObject var viewModel = PokemonDetailViewModel()
-    @StateObject var networkManager = NetworkManager.shared
+    @StateObject var viewModel: PokemonDetailViewModel
+    @StateObject var networkManager: NetworkManager
 
+    
+    init(pokemonItem: PokemonItem, pokemonDetail: PokemonDetail, isPokemonDetailPresented: Binding<Bool>, networkManager: NetworkManager = NetworkManager.shared) {
+        self.pokemonItem = pokemonItem
+        self.pokemonDetail = pokemonDetail
+        self._isPokemonDetailPresented = isPokemonDetailPresented
+        self._viewModel = StateObject(wrappedValue: PokemonDetailViewModel(pokemonDetail: pokemonDetail))
+        self._networkManager = StateObject(wrappedValue: networkManager)
+    }
     
     var body: some View {
         ScrollView {
@@ -42,8 +50,8 @@ struct PokemonDetailView: View {
                 
                 Spacer()
                 
-                PokemanEvolutionChainView(pokemonDetail: pokemonDetail, pokemonEvolutionChainModel: $viewModel.pokemonEvolutionChainModel)
-                    .frame(height: 320)
+                PokemanEvolutionChainView(pokemonDetail: pokemonDetail, pokemonEvolutionChainModel: $viewModel.pokemonEvolutionChainModel, pokemonEvolutionChainItemList: $viewModel.pokemonEvolutionChainItemList)
+                    .frame(height: 250)
                     .padding(.bottom)
                 
             } //Outer VStack
