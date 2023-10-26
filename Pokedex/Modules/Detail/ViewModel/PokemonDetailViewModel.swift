@@ -17,6 +17,7 @@ class PokemonDetailViewModel: ObservableObject {
     
     private let dispatchGroup = DispatchGroup()
     private var chainDetailList: [PokemonDetail] = []
+    var fullFlavorTexts = ""
     
     
     func fetchPokemonData(pokemonId: Int, from networkManager: NetworkManager) {

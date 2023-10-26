@@ -17,8 +17,8 @@ struct PokemonDetailView: View {
     @Binding var isPokemonDetailPresented: Bool
     @StateObject var viewModel: PokemonDetailViewModel
     @StateObject var networkManager: NetworkManager
+    @State var isShowFullDetailPresented: Bool = false
 
-    
     init(pokemonItem: PokemonItem,
          pokemonDetail: PokemonDetail,
          isPokemonDetailPresented: Binding<Bool>,
@@ -35,9 +35,12 @@ struct PokemonDetailView: View {
         ScrollView {
             VStack {
                 //Heading view
-                PokemonDetailHeadingView(pokemonDetail: pokemonDetail, pokemonSpices: $viewModel.pokemonSpeciesModel)
-                    .frame(height: 300)
-                    .padding(.bottom)
+                PokemonDetailHeadingView(pokemonDetail: pokemonDetail, pokemonSpices: $viewModel.pokemonSpeciesModel) { fullFlavorTexts in
+                    self.viewModel.fullFlavorTexts = fullFlavorTexts
+                    self.isShowFullDetailPresented = true
+                }
+                .frame(height: 300)
+                .padding(.bottom)
                     
                 Spacer()
                 
@@ -70,7 +73,18 @@ struct PokemonDetailView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(trailing: Button(action: {
             presentationMode.wrappedValue.dismiss()
-        }) { AppImages.close })
+        }) { AppImages.close.foregroundColor(AppColors.Text.primary) })        
+        .sheet(isPresented: $isShowFullDetailPresented) {
+            PopupView(isShowingPopup: $isShowFullDetailPresented) {
+                Text(viewModel.fullFlavorTexts)
+                    .foregroundColor(.white)
+                    .font(AppFont.caption)
+                    .padding()
+            }
+            .presentationDetents([.medium, .large])
+            .presentationCornerRadius(20)
+            .presentationDragIndicator(.visible)
+        }
     }
 }
 

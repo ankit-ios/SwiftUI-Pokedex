@@ -11,7 +11,7 @@ struct PokemonDetailHeadingView: View {
     
     let pokemonDetail: PokemonDetail
     @Binding var pokemonSpices: PokemonSpeciesModel?
-    @State private var isExpanded = false
+    let showFullDescriptionView: ((String) -> ())
     
     
     var body: some View {
@@ -23,14 +23,18 @@ struct PokemonDetailHeadingView: View {
                 
                 VStack(alignment: .leading, spacing: 10) {
                     Text(pokemonSpices?.getFlavorText() ?? "")
+                        .font(AppFont.caption)
                         .multilineTextAlignment(.leading)
-                        .lineLimit(isExpanded ? nil : 2)
+                        .lineLimit(nil)
+                        .padding(.top, 8)
                     
-                    //read more/less button
-                    Button(action: { withAnimation { isExpanded.toggle() }})
-                    {
-                        Text(isExpanded ? "Read Less" : DetailScreenLabels.readMoreButton)
-                            .foregroundColor(.blue)
+                    //read more button
+                    Button(action: {
+                        showFullDescriptionView(pokemonSpices?.getFullFlavorTexts() ?? "")
+                    }) {
+                        Text(DetailScreenLabels.readMoreButton)
+                            .font(AppFont.body)
+                            .foregroundColor(AppColors.Text.primary)
                             .underline()
                     }
                     Spacer()
@@ -42,7 +46,7 @@ struct PokemonDetailHeadingView: View {
 
 struct PokemonDetailHeadingView_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonDetailHeadingView(pokemonDetail: .dummy, pokemonSpices: .constant(nil))
+        PokemonDetailHeadingView(pokemonDetail: .dummy, pokemonSpices: .constant(nil), showFullDescriptionView: { _ in })
     }
 }
 

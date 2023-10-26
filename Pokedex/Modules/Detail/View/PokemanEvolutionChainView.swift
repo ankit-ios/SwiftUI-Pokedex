@@ -22,49 +22,42 @@ struct PokemanEvolutionChainView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(DetailScreenLabels.evolutionChainLabel)
-                .font(AppFont.subtitle)
-                .fontWeight(.bold)
-
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 10) {
-                    ForEach(pokemonEvolutionChainItemList ?? [], id: \.id) { item in
-                        ImageViewWithGradient(imageURL: item.imageUrl ?? "", gradientColors: item.gradientColors)
-                            .aspectRatio(0.7, contentMode: .fit)
-                        
-                        if pokemonEvolutionChainItemList?.last?.id != item.id {
-                            AppImages.rightArrow
-                                .foregroundColor(.black)
+        GeometryReader { geometryProxy in
+            VStack(alignment: .leading) {
+                Text(DetailScreenLabels.evolutionChainLabel)
+                    .font(AppFont.subtitle)
+                    .fontWeight(.bold)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 10) {
+                        ForEach(pokemonEvolutionChainItemList ?? [], id: \.id) { item in
+                            ImageViewWithGradient(imageURL: item.imageUrl ?? "", gradientColors: item.gradientColors)
+                                .aspectRatio(0.7, contentMode: .fit)
+                            
+                            if pokemonEvolutionChainItemList?.last?.id != item.id {
+                                AppImages.rightArrow
+                                    .foregroundColor(.black)
+                            }
                         }
                     }
                 }
-            }
-            
-            Spacer()
-            
-            HStack(alignment: .center) {
-                Button {
-                    print(pokemonDetail)
-                    if let id = viewmodel.getPreviousPokemanId() {
-                        print(id)
-                    }
-                } label: {
-                    Text(DetailScreenLabels.previousLabel)
-                }
-                .foregroundColor(.white)
-                .background(.blue)
                 
                 Spacer()
-                Button {
-                    print(viewmodel.getNextPokemanId())
-                } label: {
-                    Text(DetailScreenLabels.nextLabel)
+                
+                HStack(alignment: .center) {
+                    ButtonWithLabel(label: DetailScreenLabels.previousLabel) {
+                        if let id = viewmodel.getPreviousPokemanId() {
+                            print(id)
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    ButtonWithLabel(label: DetailScreenLabels.nextLabel) {
+                        print(viewmodel.getNextPokemanId())
+                    }
                 }
-                .foregroundColor(.white)
-                .background(.blue)
             }
-            .padding()
         }
     }
 }

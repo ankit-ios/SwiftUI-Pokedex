@@ -19,7 +19,7 @@ struct PokemonItemView: View {
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                    Text(pokemon.name)
+                    Text(pokemon.name.capitalized)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                     Spacer()

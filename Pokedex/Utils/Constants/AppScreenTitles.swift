@@ -39,6 +39,6 @@ struct DetailScreenLabels {
     static let weakAgainstLabel = "Weak Against"
     static let statsLabel = "Stats"
     static let evolutionChainLabel = "Evolution Chain"
-    static let previousLabel = "Previous"
-    static let nextLabel = "Next"
+    static let previousLabel = "Charmeleon"
+    static let nextLabel = "Squirtle"
 }
