@@ -18,6 +18,8 @@
 		AD0351C32AEA785F00DADC93 /* ButtonWithLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0351C22AEA785F00DADC93 /* ButtonWithLabel.swift */; };
 		AD0351C62AEA897F00DADC93 /* NavigationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0351C52AEA897F00DADC93 /* NavigationHeaderView.swift */; };
 		AD0351C92AEA8CFF00DADC93 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0351C82AEA8CFF00DADC93 /* ImageCacheManager.swift */; };
+		AD0351CC2AEA926100DADC93 /* pokeapi.cer in Resources */ = {isa = PBXBuildFile; fileRef = AD0351CB2AEA926100DADC93 /* pokeapi.cer */; };
+		AD0351CF2AEA942100DADC93 /* URLSessionPinningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0351CE2AEA942100DADC93 /* URLSessionPinningDelegate.swift */; };
 		AD0AD6CE2AE3F42F0052F625 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0AD6CD2AE3F42F0052F625 /* NetworkManager.swift */; };
 		AD0AD6D02AE3F5F80052F625 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0AD6CF2AE3F5F80052F625 /* HomeViewModel.swift */; };
 		AD0AD6D22AE3FB0A0052F625 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0AD6D12AE3FB0A0052F625 /* APIRequest.swift */; };
@@ -96,6 +98,8 @@
 		AD0351C22AEA785F00DADC93 /* ButtonWithLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithLabel.swift; sourceTree = "<group>"; };
 		AD0351C52AEA897F00DADC93 /* NavigationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHeaderView.swift; sourceTree = "<group>"; };
 		AD0351C82AEA8CFF00DADC93 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
+		AD0351CB2AEA926100DADC93 /* pokeapi.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pokeapi.cer; sourceTree = "<group>"; };
+		AD0351CE2AEA942100DADC93 /* URLSessionPinningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionPinningDelegate.swift; sourceTree = "<group>"; };
 		AD0AD6CD2AE3F42F0052F625 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		AD0AD6CF2AE3F5F80052F625 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		AD0AD6D12AE3FB0A0052F625 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
@@ -189,6 +193,22 @@
 			path = ImageCacheManager;
 			sourceTree = "<group>";
 		};
+		AD0351CA2AEA925600DADC93 /* Cer */ = {
+			isa = PBXGroup;
+			children = (
+				AD0351CB2AEA926100DADC93 /* pokeapi.cer */,
+			);
+			path = Cer;
+			sourceTree = "<group>";
+		};
+		AD0351CD2AEA941700DADC93 /* SSLPinning */ = {
+			isa = PBXGroup;
+			children = (
+				AD0351CE2AEA942100DADC93 /* URLSessionPinningDelegate.swift */,
+			);
+			path = SSLPinning;
+			sourceTree = "<group>";
+		};
 		AD0AD6CB2AE3F4120052F625 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +223,7 @@
 		AD0AD6CC2AE3F41C0052F625 /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
+				AD0351CD2AEA941700DADC93 /* SSLPinning */,
 				AD0AD6D32AE3FB480052F625 /* PokemonAPI */,
 				AD0AD6CD2AE3F42F0052F625 /* NetworkManager.swift */,
 				AD0AD6D12AE3FB0A0052F625 /* APIRequest.swift */,
@@ -292,6 +313,7 @@
 		ADE057172AEA545500AED6F1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AD0351CA2AEA925600DADC93 /* Cer */,
 				ADE057182AEA54B100AED6F1 /* Fonts */,
 				ADEAB42C2AE17A9200E81FCE /* Assets.xcassets */,
 			);
@@ -607,6 +629,7 @@
 				AD0351BA2AEA649700DADC93 /* Roboto-Regular.ttf in Resources */,
 				AD0351B92AEA649700DADC93 /* Roboto-Black.ttf in Resources */,
 				AD0351BF2AEA649700DADC93 /* Roboto-Light.ttf in Resources */,
+				AD0351CC2AEA926100DADC93 /* pokeapi.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,6 +684,7 @@
 				AD13FA272AE63081009DF988 /* PokemonDetailViewModel.swift in Sources */,
 				ADEAB45B2AE268E400E81FCE /* SearchBar.swift in Sources */,
 				AD0AD6D02AE3F5F80052F625 /* HomeViewModel.swift in Sources */,
+				AD0351CF2AEA942100DADC93 /* URLSessionPinningDelegate.swift in Sources */,
 				ADE056FD2AEA2AD400AED6F1 /* PokemonViewModel.swift in Sources */,
 				ADE057082AEA430E00AED6F1 /* PokemonListResponse.swift in Sources */,
 				ADEAB4632AE269F700E81FCE /* FilterView.swift in Sources */,
