@@ -29,6 +29,8 @@ struct DottedBorderModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .overlay(DottedBorder(color: color, lineWidth: lineWidth, dash: dash, cornerRadius: cornerRadius))
+            .cornerRadius(12)
+            .shadow(color: AppColors.Text.primary.opacity(0.5), radius: 5, x: 0, y: 2)
     }
 }
 

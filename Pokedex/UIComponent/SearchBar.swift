@@ -15,7 +15,7 @@ struct SearchBar: View {
     var body: some View {
         HStack {
             AppImages.search
-                .foregroundColor(searchText.isEmpty ? Color.black.opacity(0.5) : .black)
+                .foregroundColor(searchText.isEmpty ? AppColors.Text.primary.opacity(0.5) : AppColors.Text.primary)
             
             TextField(HomeScreenLabels.searchPlaceholder, text: $searchText)
                 .textFieldStyle(.plain)
@@ -34,11 +34,11 @@ struct SearchBar: View {
                 }
             
         }
-        .font(.headline)
+        .font(AppFont.body)
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 25)
-                .fill(.background)
+            RoundedRectangle(cornerRadius: 8)
+                .fill(AppColors.Background.secondary)
                 .shadow(color: .gray.opacity(0.5), radius: 10, x: 0, y: 0)
         )
     }

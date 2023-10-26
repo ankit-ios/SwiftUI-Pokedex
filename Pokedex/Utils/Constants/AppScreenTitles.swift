@@ -14,7 +14,7 @@ struct AppScreenTitles {
 
 struct HomeScreenLabels {
     static let searchLabel = "Search for any Pokemon that exits on the planet"
-    static let searchPlaceholder = "Search by name"
+    static let searchPlaceholder = "Name or Number"
     static let loadingMore = "Loading more pokemon species..."
 }
 

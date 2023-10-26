@@ -52,9 +52,8 @@ struct HomeView: View {
                             .foregroundColor(.white)
                             .padding()
                     }
-                    .frame(width: 50, height: 50)
-                    .foregroundColor(.yellow)
-                    .background(.blue)
+                    .frame(width: 60, height: 50)
+                    .background(AppColors.Text.primary)
                     .cornerRadius(10)
                 }
                 
@@ -74,8 +73,6 @@ struct HomeView: View {
                                         .frame(maxWidth: .infinity, alignment: .center)
                                         .frame(height: 200)
                                         .dottedBorder(color: .black, lineWidth: 1, dash: [5, 5], cornerRadius: 12)
-                                        .cornerRadius(12)
-                                        .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 2)
                                         .onAppear {
                                             // pagignation logic
                                             if viewModel.hasReachedEnd(of: item) {

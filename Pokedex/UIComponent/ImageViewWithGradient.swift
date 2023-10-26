@@ -33,10 +33,8 @@ struct ImageViewWithGradient: View {
                 }
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
-            .dottedBorder(color: .black, lineWidth: 1, dash: [5, 5], cornerRadius: 12)
             .addGradient(colors: gradientColors)
-            .cornerRadius(12)
-            .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 2)
+            .dottedBorder(color: .black, lineWidth: 1, dash: [5, 5], cornerRadius: 12)
         }
     }
 }

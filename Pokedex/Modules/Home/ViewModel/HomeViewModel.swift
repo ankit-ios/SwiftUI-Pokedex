@@ -40,7 +40,8 @@ class HomeViewModel: ObservableObject {
     
     func performSearch() {
         filteredPokemons = searchQuery.isEmpty ? allPokemons : allPokemons
-            .filter { $0.name.lowercased().contains(searchQuery.lowercased()) }
+            .filter { $0.name.lowercased().contains(searchQuery.lowercased()) ||
+                "\(self.getId(from: $0.url) ?? -1)" == searchQuery }
     }
     
     func fetchPokemonList(from networkManager: NetworkManager) {

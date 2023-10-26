@@ -78,11 +78,11 @@ struct PokemanAbilityView: View {
                                             .font(AppFont.caption)
                                             .padding(.init(top: 2, leading: 8, bottom: 2, trailing: 8))
                                             .background((PokemonType(rawValue: item) ?? .normal).color)
-                                            .foregroundColor(.black)
+                                            .foregroundColor(AppColors.Text.primary)
                                             .cornerRadius(6)
                                             .overlay(
                                                 RoundedRectangle(cornerRadius: 6)
-                                                    .stroke(Color.black, lineWidth: 1)
+                                                    .stroke(AppColors.Text.primary, lineWidth: 1)
                                             )
                                     }.padding(.horizontal, 1)
                                 }
@@ -105,11 +105,11 @@ struct PokemanAbilityView: View {
                                     .font(AppFont.caption)
                                     .padding(.init(top: 2, leading: 8, bottom: 2, trailing: 8))
                                     .background((PokemonType(rawValue: item) ?? .normal).color)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(AppColors.Text.primary)
                                     .cornerRadius(6)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 6)
-                                            .stroke(Color.black, lineWidth: 1)
+                                            .stroke(AppColors.Text.primary, lineWidth: 1)
                                     )
                             }.padding(.horizontal, 1)
                         }

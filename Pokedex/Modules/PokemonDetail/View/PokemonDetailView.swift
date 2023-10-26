@@ -34,14 +34,20 @@ struct PokemonDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
+                
+                Spacer()
+                //Navigation view
+                NavigationHeaderView(model: NavigationHeaderItem(title: pokemonItem.name, subTitle: String(format: "00%d", pokemonDetail.id), isPresented: presentationMode))
+                    .padding(.horizontal)
+                
                 //Heading view
                 PokemonDetailHeadingView(pokemonDetail: pokemonDetail, pokemonSpices: $viewModel.pokemonSpeciesModel) { fullFlavorTexts in
                     self.viewModel.fullFlavorTexts = fullFlavorTexts
                     self.isShowFullDetailPresented = true
                 }
                 .frame(height: 300)
-                .padding()
-                    
+                .padding(.horizontal)
+
                 Spacer()
                 
                 //Pokeman Ability view
@@ -67,12 +73,7 @@ struct PokemonDetailView: View {
             }
         }
         .background(AppColors.Background.primary)
-        .navigationTitle(pokemonItem.name)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(trailing: Button(action: {
-            presentationMode.wrappedValue.dismiss()
-        }) { AppImages.close.foregroundColor(AppColors.Text.primary) })
+        .navigationBarHidden(true)
         .sheet(isPresented: $isShowFullDetailPresented) {
             PopupView(isShowingPopup: $isShowFullDetailPresented) {
                 Text(viewModel.fullFlavorTexts)
