@@ -18,4 +18,5 @@ struct AppImages {
     static let checkboxFill = Image(systemName: "checkmark.square.fill")
     static let collapse = Image(systemName: "minus.circle")
     static let expand = Image(systemName: "plus.circle")
+    static let filter = Image("filter")
 }

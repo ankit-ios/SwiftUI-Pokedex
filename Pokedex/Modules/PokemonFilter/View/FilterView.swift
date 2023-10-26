@@ -12,8 +12,8 @@ struct FilterView: View {
     @State private var selectedFilter = "None"
     
     let data: [AccordianModel] = [
-        .init(title: "Type", items: ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8"]),
-        .init(title: "Gender", items: ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 42", "Item 53", "Item 64", "Item 72"]),
+        .init(title: "Type", items: PokemonType.allCases.map { $0.rawValue }),
+        .init(title: "Gender", items: ["Male", "Female"]),
         .init(title: "Stats", items: ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 42", "Item 53", "Item 64", "Item 72"])
     ]
     

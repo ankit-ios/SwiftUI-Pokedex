@@ -15,6 +15,9 @@ class HomeViewModel: ObservableObject {
     @Published var pokemonsDetails: [PokemonItem: PokemonDetail] = [:]
     @Published var searchQuery: String = ""
     
+    @StateObject var networkManager: NetworkManager
+    
+    
     private var cancellable: AnyCancellable?
     
     //Pagignation logic
@@ -24,9 +27,10 @@ class HomeViewModel: ObservableObject {
     
     var isFetchingData: Bool = false
     
-    init() {
+    
+    init(networkManager: NetworkManager = .shared) {
+        self._networkManager = StateObject(wrappedValue: networkManager)
         setupSearchPublisher()
-        _ = PokemonGenderManager.shared //TODO
     }
     
     private func setupSearchPublisher() {

@@ -22,10 +22,10 @@ class PokemonGenderManager {
 
     private init() {
         networkManager = NetworkManager.shared
-        fetchGenderData()
     }
 
-    private func fetchGenderData() {
+    
+    func fetchGenderData() {
         let requests = PokemonGender.allCases.map { gender in
             networkManager.request(PokemonApi.gender(type: gender.rawValue), responseType: PokemonGenderResponse.self)
         }

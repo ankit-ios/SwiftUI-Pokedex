@@ -45,7 +45,7 @@ struct HomeView: View {
                     Button(action: {
                         isFilterSheetPresented = true
                     }) {
-                        Image("filter")
+                        AppImages.filter
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 30, height: 30)
