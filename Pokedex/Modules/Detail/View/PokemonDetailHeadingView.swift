@@ -18,7 +18,7 @@ struct PokemonDetailHeadingView: View {
         GeometryReader { geometry in
             HStack (alignment: .center, spacing: 20) {
                 
-                ImageViewWithGradient.init(imageURL: pokemonDetail.sprites.actualImage ?? "", gradientColors: pokemonDetail.gradientColors)
+                ImageViewWithGradient(imageURL: pokemonDetail.sprites.actualImage ?? "", gradientColors: pokemonDetail.gradientColors)
                     .frame(width: geometry.size.width*0.4, height: geometry.size.height)
                 
                 VStack(alignment: .leading, spacing: 10) {

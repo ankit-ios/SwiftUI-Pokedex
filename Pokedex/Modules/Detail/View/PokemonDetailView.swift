@@ -19,11 +19,15 @@ struct PokemonDetailView: View {
     @StateObject var networkManager: NetworkManager
 
     
-    init(pokemonItem: PokemonItem, pokemonDetail: PokemonDetail, isPokemonDetailPresented: Binding<Bool>, networkManager: NetworkManager = NetworkManager.shared) {
+    init(pokemonItem: PokemonItem,
+         pokemonDetail: PokemonDetail,
+         isPokemonDetailPresented: Binding<Bool>,
+         networkManager: NetworkManager = NetworkManager.shared) {
+        
         self.pokemonItem = pokemonItem
         self.pokemonDetail = pokemonDetail
         self._isPokemonDetailPresented = isPokemonDetailPresented
-        self._viewModel = StateObject(wrappedValue: PokemonDetailViewModel(pokemonDetail: pokemonDetail))
+        self._viewModel = StateObject(wrappedValue: PokemonDetailViewModel())
         self._networkManager = StateObject(wrappedValue: networkManager)
     }
     
@@ -50,10 +54,10 @@ struct PokemonDetailView: View {
                 
                 Spacer()
                 
-                PokemanEvolutionChainView(pokemonDetail: pokemonDetail, pokemonEvolutionChainModel: $viewModel.pokemonEvolutionChainModel, pokemonEvolutionChainItemList: $viewModel.pokemonEvolutionChainItemList)
-                    .frame(height: 250)
-                    .padding(.bottom)
-                
+                PokemanEvolutionChainView(pokemonDetail: pokemonDetail,
+                                          pokemonEvolutionChainItemList: $viewModel.pokemonEvolutionChainItemList)
+                .frame(height: 250)
+                .padding(.bottom)
             } //Outer VStack
             .onAppear {
                 viewModel.fetchPokemonData(pokemonId: pokemonDetail.id, from: networkManager)

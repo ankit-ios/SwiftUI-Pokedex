@@ -99,6 +99,13 @@ class HomeViewModel: ObservableObject {
         pokemonsDetails.first(where: { $0.key.name == item.name })?.value
     }
     
+    func getPokemon(for id: Int) -> (PokemonItem?, PokemonDetail?) {
+        if let item = pokemonsDetails.first(where: { getId(from: $0.key.url) == id }) {
+            return (item.key, item.value)
+        }
+        return (nil, nil)
+    }
+    
     func hasReachedEnd(of item: PokemonItem) -> Bool {
         filteredPokemons.last?.name == item.name
     }
