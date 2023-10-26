@@ -17,6 +17,7 @@
 		AD0351C12AEA744100DADC93 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0351C02AEA744100DADC93 /* PopupView.swift */; };
 		AD0351C32AEA785F00DADC93 /* ButtonWithLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0351C22AEA785F00DADC93 /* ButtonWithLabel.swift */; };
 		AD0351C62AEA897F00DADC93 /* NavigationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0351C52AEA897F00DADC93 /* NavigationHeaderView.swift */; };
+		AD0351C92AEA8CFF00DADC93 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0351C82AEA8CFF00DADC93 /* ImageCacheManager.swift */; };
 		AD0AD6CE2AE3F42F0052F625 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0AD6CD2AE3F42F0052F625 /* NetworkManager.swift */; };
 		AD0AD6D02AE3F5F80052F625 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0AD6CF2AE3F5F80052F625 /* HomeViewModel.swift */; };
 		AD0AD6D22AE3FB0A0052F625 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0AD6D12AE3FB0A0052F625 /* APIRequest.swift */; };
@@ -94,6 +95,7 @@
 		AD0351C02AEA744100DADC93 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		AD0351C22AEA785F00DADC93 /* ButtonWithLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithLabel.swift; sourceTree = "<group>"; };
 		AD0351C52AEA897F00DADC93 /* NavigationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHeaderView.swift; sourceTree = "<group>"; };
+		AD0351C82AEA8CFF00DADC93 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		AD0AD6CD2AE3F42F0052F625 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		AD0AD6CF2AE3F5F80052F625 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		AD0AD6D12AE3FB0A0052F625 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
@@ -179,9 +181,18 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		AD0351C72AEA8CEA00DADC93 /* ImageCacheManager */ = {
+			isa = PBXGroup;
+			children = (
+				AD0351C82AEA8CFF00DADC93 /* ImageCacheManager.swift */,
+			);
+			path = ImageCacheManager;
+			sourceTree = "<group>";
+		};
 		AD0AD6CB2AE3F4120052F625 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				AD0351C72AEA8CEA00DADC93 /* ImageCacheManager */,
 				AD13FA232AE56856009DF988 /* PokemonGenderManager */,
 				AD13FA202AE52B83009DF988 /* ThemeManager */,
 				AD0AD6CC2AE3F41C0052F625 /* NetworkManager */,
@@ -642,6 +653,7 @@
 				AD0B871B2AE9AA870002020C /* PokemonEvolutionChainModel.swift in Sources */,
 				ADEAB4292AE17A9100E81FCE /* PokedexApp.swift in Sources */,
 				AD13FA312AE6B107009DF988 /* PokemanEvolutionChainViewModel.swift in Sources */,
+				AD0351C92AEA8CFF00DADC93 /* ImageCacheManager.swift in Sources */,
 				ADC8C9672AE2A97900041BAC /* PokemanEvolutionChainView.swift in Sources */,
 				AD13FA1F2AE51B63009DF988 /* Pokemon+Extensions.swift in Sources */,
 				ADE0570C2AEA435E00AED6F1 /* PokemonGenderResponse.swift in Sources */,
