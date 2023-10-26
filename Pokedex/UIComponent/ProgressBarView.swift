@@ -32,7 +32,7 @@ struct ProgressBarView: View {
                 
                 Text("\(progress)")
                     .foregroundColor(.white)
-                    .font(.system(size: 16))
+                    .font(AppFont.caption)
                     .padding()
             }
             .frame(height: barHeight)

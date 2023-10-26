@@ -15,7 +15,7 @@ struct CheckboxView: View {
     var body: some View {
         HStack {
             Button(action: { isChecked.toggle() }) {
-                Image(systemName: isChecked ? "checkmark.square.fill" : "square")
+                (isChecked ? AppImages.checkboxFill : AppImages.checkbox)
             }
             Text(text)
         }

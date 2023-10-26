@@ -23,10 +23,10 @@ struct PokemanEvolutionChainView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Evolution Chain")
-                .fontWeight(.heavy)
-                .font(.system(size: 24))
-            
+            Text(DetailScreenLabels.evolutionChainLabel)
+                .font(AppFont.subtitle)
+                .fontWeight(.bold)
+
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     ForEach(pokemonEvolutionChainItemList ?? [], id: \.id) { item in
@@ -34,7 +34,7 @@ struct PokemanEvolutionChainView: View {
                             .aspectRatio(0.7, contentMode: .fit)
                         
                         if pokemonEvolutionChainItemList?.last?.id != item.id {
-                            Image(systemName: "arrow.right")
+                            AppImages.rightArrow
                                 .foregroundColor(.black)
                         }
                     }
@@ -50,7 +50,7 @@ struct PokemanEvolutionChainView: View {
                         print(id)
                     }
                 } label: {
-                    Text("Previous")
+                    Text(DetailScreenLabels.previousLabel)
                 }
                 .foregroundColor(.white)
                 .background(.blue)
@@ -59,7 +59,7 @@ struct PokemanEvolutionChainView: View {
                 Button {
                     print(viewmodel.getNextPokemanId())
                 } label: {
-                    Text("Next")
+                    Text(DetailScreenLabels.nextLabel)
                 }
                 .foregroundColor(.white)
                 .background(.blue)

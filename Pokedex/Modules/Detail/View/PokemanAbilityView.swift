@@ -21,24 +21,27 @@ struct PokemanAbilityView: View {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading) {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Height").fontWeight(.bold)
-                            Text("\(pokemonDetail.height)")
+                            Text(DetailScreenLabels.heightLabel)
+                                .font(AppFont.body)
+                            Text("\(pokemonDetail.height)").font(AppFont.caption)
                         }
                         .padding(.bottom)
                         
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Gender(s)").fontWeight(.bold)
-                            Text("\(PokemonGenderManager.shared.getGender(for: pokemonDetail.name ?? ""))")
+                            Text(DetailScreenLabels.genderLabel)
+                                .font(AppFont.body)
+                            Text("\(PokemonGenderManager.shared.getGender(for: pokemonDetail.name ?? ""))").font(AppFont.caption)
                         }
                         .padding(.bottom)
                         
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Abilities").fontWeight(.bold)
-                            
+                            Text(DetailScreenLabels.abilitiesLabel)
+                                .font(AppFont.body)
                             let abilitiesArr = pokemonDetail.abilities
                                 .compactMap { $0.ability?.name }
                                 .joined(separator: ", ")
                             Text("\(abilitiesArr)")
+                                .font(AppFont.caption)
                         }
                         .padding(.bottom)
                         
@@ -48,27 +51,33 @@ struct PokemanAbilityView: View {
                     VStack(alignment: .leading) {
                         
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Weight").fontWeight(.bold)
+                            Text(DetailScreenLabels.weightLabel)
+                                .font(AppFont.body)
                             Text("\(pokemonDetail.weight)")
+                                .font(AppFont.caption)
                         }
                         .padding(.bottom)
                         
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Egg Groups").fontWeight(.bold)
+                            Text(DetailScreenLabels.eggGroupLabel)
+                                .font(AppFont.body)
                             Text(pokemonSpecies?.getEggGroups().joined(separator: ", ") ?? "")
+                                .font(AppFont.caption)
                         }
                         .padding(.bottom)
                         
                         
                         VStack(alignment: .leading, spacing: 0) {
-                            Text("Types").fontWeight(.bold)
+                            Text(DetailScreenLabels.typesLabel)
+                                .font(AppFont.body)
                             ScrollView(.horizontal, showsIndicators: true) {
                                 let types = pokemonDetail.types.compactMap { $0.type?.name }
                                 LazyHGrid(rows: [GridItem(.adaptive(minimum: 20))]) {
                                     ForEach(types, id: \.self) { item in
                                         Text(item)
+                                            .font(AppFont.caption)
                                             .padding(.init(top: 2, leading: 8, bottom: 2, trailing: 8))
-                                            .background(Color(hex: (PokemonType(rawValue: item) ?? .normal).actionColorHex))
+                                            .background((PokemonType(rawValue: item) ?? .normal).color)
                                             .foregroundColor(.black)
                                             .cornerRadius(6)
                                             .overlay(
@@ -86,14 +95,16 @@ struct PokemanAbilityView: View {
                 }
                 
                 VStack(alignment: .leading) {
-                    Text("Week Against").fontWeight(.bold)
+                    Text(DetailScreenLabels.weakAgainstLabel)
+                        .font(AppFont.body)
                     ScrollView(.horizontal, showsIndicators: true) {
                         LazyHGrid(rows: [GridItem(.adaptive(minimum: 20))]) {
                             let weekAgainst = pokemonTypeDetail?.getPokemenWeakAgainst() ?? []
                             ForEach(weekAgainst, id: \.self) { item in
                                 Text(item)
+                                    .font(AppFont.caption)
                                     .padding(.init(top: 2, leading: 8, bottom: 2, trailing: 8))
-                                    .background(Color(hex: (PokemonType(rawValue: item) ?? .normal).actionColorHex))
+                                    .background((PokemonType(rawValue: item) ?? .normal).color)
                                     .foregroundColor(.black)
                                     .cornerRadius(6)
                                     .overlay(

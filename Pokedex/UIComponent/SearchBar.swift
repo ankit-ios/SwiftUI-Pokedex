@@ -14,13 +14,13 @@ struct SearchBar: View {
     
     var body: some View {
         HStack {
-            Image(systemName: "magnifyingglass")
+            AppImages.search
                 .foregroundColor(searchText.isEmpty ? Color.black.opacity(0.5) : .black)
             
-            TextField("Search by name", text: $searchText)
+            TextField(HomeScreenLabels.searchPlaceholder, text: $searchText)
                 .textFieldStyle(.plain)
                 .overlay(
-                    Image(systemName: "xmark.circle.fill")
+                    AppImages.closeFill
                         .padding()
                         .offset(x: 10)
                         .opacity(searchText.isEmpty ? 0 : 1)

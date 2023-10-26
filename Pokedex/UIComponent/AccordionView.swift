@@ -45,7 +45,7 @@ struct AccordionView: View {
                 }
             })
             .padding()
-            .disclosureGroupStyle(CustomDisclosureGroupStyle(image: Image(systemName: isExpanded ? "minus.circle" : "plus.circle")))
+            .disclosureGroupStyle(CustomDisclosureGroupStyle(image: isExpanded ? AppImages.collapse : AppImages.expand))
         }.background(RoundedRectangle(cornerRadius: 8).stroke(.black.opacity(0.5), lineWidth: 1))
     }
     

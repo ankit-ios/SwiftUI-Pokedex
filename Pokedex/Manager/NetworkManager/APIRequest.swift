@@ -7,12 +7,6 @@
 
 import Foundation
 
-enum HTTPMethod: String {
-    case get = "GET"
-    case post = "POST"
-    // Add more methods as needed
-}
-
 protocol APIRequest {
     var baseURL: String { get }
     var endpoint: String { get }
@@ -23,7 +17,7 @@ protocol APIRequest {
 }
 
 extension APIRequest {
-    var baseURL: String { "https://pokeapi.co/api/v2" }
+    var baseURL: String { AppConstants.API.baseURL() }
     var method: HTTPMethod { .get }
     var additionalHeader: [String: String] { [:] }
     var requestParameters: [String: Any]? { nil }

@@ -7,10 +7,27 @@
 
 import SwiftUI
 
+//MARK: - String Extension
+
+extension String {
+    static func convertAnyToString(_ value: Any) -> String? {
+        if let stringValue = value as? String {
+            return stringValue
+        } else if let intValue = value as? Int {
+            return "\(intValue)"
+        } else {
+            return nil
+        }
+    }
+}
+
+//MARK: - View Extension
 
 extension View {
     func addGradient(colors: [Color]) -> some View {
-        let gradient = LinearGradient(gradient: Gradient(colors: colors), startPoint: .top, endPoint: .bottom)
+        let gradient = LinearGradient(gradient: Gradient(colors: colors),
+                                      startPoint: .top,
+                                      endPoint: .bottom)
         return self.background(gradient)
     }
     
@@ -18,6 +35,8 @@ extension View {
         return self
     }
 }
+
+//MARK: - Color Extension
 
 extension Color {
     init(hex: String) {
@@ -37,6 +56,8 @@ extension Color {
         self.init(red: red, green: green, blue: blue)
     }
 }
+
+//MARK: - UIApplication Extension
 
 extension UIApplication {
     

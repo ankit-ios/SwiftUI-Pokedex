@@ -29,7 +29,7 @@ struct PokemonDetailHeadingView: View {
                     //read more/less button
                     Button(action: { withAnimation { isExpanded.toggle() }})
                     {
-                        Text(isExpanded ? "Read Less" : "Read More")
+                        Text(isExpanded ? "Read Less" : DetailScreenLabels.readMoreButton)
                             .foregroundColor(.blue)
                             .underline()
                     }

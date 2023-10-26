@@ -32,7 +32,7 @@ struct HomeView: View {
                     .background(.gray)
                 
                 //top label
-                Text("Search for any Pokemon that exits on the planet")
+                Text(HomeScreenLabels.searchLabel)
                 
                 HStack {
                     
@@ -95,9 +95,9 @@ struct HomeView: View {
                 }
                 .overlay(alignment: .bottom, content: {
                     if viewModel.isFetchingData {
-                        Text("Loading more pokemon species...")
+                        Text(HomeScreenLabels.loadingMore)
                             .padding()
-                            .font(.system(size: 14))
+                            .font(AppFont.caption)
                             .foregroundColor(.white)
                             .background(.blue)
                             .transition(.opacity)
@@ -108,8 +108,8 @@ struct HomeView: View {
                 Spacer()
             }
             .padding()
-            .background(Color(hex: "#DEEDED"))
-            .navigationTitle("Pokedex")
+            .background(AppColors.Background.primary)
+            .navigationTitle(AppScreenTitles.home)
             .sheet(isPresented: $isFilterSheetPresented) {
                 FilterView(isFilterSheetPresented: $isFilterSheetPresented)
             }

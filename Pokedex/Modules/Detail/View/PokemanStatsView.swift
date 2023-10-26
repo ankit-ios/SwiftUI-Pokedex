@@ -17,17 +17,17 @@ struct PokemanStatsView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Stats")
-                .fontWeight(.heavy)
-                .font(.system(size: 24))
+            Text(DetailScreenLabels.statsLabel)
+                .font(AppFont.subtitle)
+//                .fontWeight(.bold)
                         
             ForEach(stats, id: \.name) { item in
                 
                 HStack(alignment: .center, spacing: 2) {
                     Text(item.name.capitalized)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .fontWeight(.medium)
-                        .font(.system(size: 16))
+//                        .fontWeight(.medium)
+                        .font(AppFont.caption)
                     Spacer()
                     ProgressBarView(progress: item.percentage)
                         .frame(height: 20)

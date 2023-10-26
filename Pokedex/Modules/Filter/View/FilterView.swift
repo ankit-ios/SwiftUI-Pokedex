@@ -40,7 +40,7 @@ struct FilterView: View {
                     .padding()
                     
                     HStack {
-                        Button("Reset") {
+                        Button(FilterScreenLabels.resetButton) {
                             
                         }
                         .font(.title)
@@ -53,7 +53,7 @@ struct FilterView: View {
 
                         
                         Spacer()
-                        Button("Apply") {
+                        Button(FilterScreenLabels.applyButton) {
                             
                         }
                         .font(.title)
@@ -70,9 +70,9 @@ struct FilterView: View {
                     .shadow(color: .gray.opacity(0.5), radius: 10, x: 0, y: -10)
                 }
             }
-            .navigationBarTitle("Filters")
+            .navigationBarTitle(AppScreenTitles.filter)
             .navigationBarItems(
-                trailing: Button("Cancel") {
+                trailing: Button(FilterScreenLabels.cancelButton) {
                     isFilterSheetPresented = false
                 }
             )

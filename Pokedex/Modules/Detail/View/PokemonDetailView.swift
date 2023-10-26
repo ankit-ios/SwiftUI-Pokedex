@@ -64,13 +64,13 @@ struct PokemonDetailView: View {
             }
             .padding()
         }
-        .background(Color(hex: "#DEEDED"))
+        .background(AppColors.Background.primary)
         .navigationTitle(pokemonItem.name)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(trailing: Button(action: {
             presentationMode.wrappedValue.dismiss()
-        }) { Image(systemName: "xmark.circle") })
+        }) { AppImages.close })
     }
 }
 
