@@ -99,7 +99,7 @@ struct HomeView: View {
                             .padding()
                             .font(AppFont.caption)
                             .foregroundColor(.white)
-                            .background(.blue)
+                            .background(AppColors.Text.primary)
                             .transition(.opacity)
                             .cornerRadius(12)
                             .shadow(color: .black.opacity(0.5), radius: 12, x: 0, y: 10)

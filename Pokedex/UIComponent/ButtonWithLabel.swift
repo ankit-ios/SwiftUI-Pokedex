@@ -23,6 +23,5 @@ struct ButtonWithLabel: View {
                 .fill(AppColors.Text.primary)
         )
         .padding()
-        .frame(width: UIScreen.main.bounds.size.width * 0.4)
     }
 }

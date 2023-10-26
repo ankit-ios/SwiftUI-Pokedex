@@ -40,14 +40,14 @@ struct PokemonDetailView: View {
                     self.isShowFullDetailPresented = true
                 }
                 .frame(height: 300)
-                .padding(.bottom)
+                .padding()
                     
                 Spacer()
                 
                 //Pokeman Ability view
                 PokemanAbilityView(pokemonDetail: pokemonDetail, pokemonSpecies: $viewModel.pokemonSpeciesModel, pokemonTypeDetail: $viewModel.pokemonTypeDetailModel)
                     .frame(height: 320)
-                    .padding(.bottom)
+                    .padding()
                 Spacer()
                 
                 //Pokeman State view
@@ -60,12 +60,11 @@ struct PokemonDetailView: View {
                 PokemanEvolutionChainView(pokemonDetail: pokemonDetail,
                                           pokemonEvolutionChainItemList: $viewModel.pokemonEvolutionChainItemList)
                 .frame(height: 250)
-                .padding(.bottom)
+                .padding()
             } //Outer VStack
             .onAppear {
                 viewModel.fetchPokemonData(pokemonId: pokemonDetail.id, from: networkManager)
             }
-            .padding()
         }
         .background(AppColors.Background.primary)
         .navigationTitle(pokemonItem.name)
@@ -73,7 +72,7 @@ struct PokemonDetailView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(trailing: Button(action: {
             presentationMode.wrappedValue.dismiss()
-        }) { AppImages.close.foregroundColor(AppColors.Text.primary) })        
+        }) { AppImages.close.foregroundColor(AppColors.Text.primary) })
         .sheet(isPresented: $isShowFullDetailPresented) {
             PopupView(isShowingPopup: $isShowFullDetailPresented) {
                 Text(viewModel.fullFlavorTexts)

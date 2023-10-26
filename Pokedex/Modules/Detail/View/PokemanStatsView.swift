@@ -19,14 +19,12 @@ struct PokemanStatsView: View {
         VStack(alignment: .leading) {
             Text(DetailScreenLabels.statsLabel)
                 .font(AppFont.subtitle)
-//                .fontWeight(.bold)
                         
             ForEach(stats, id: \.name) { item in
                 
                 HStack(alignment: .center, spacing: 2) {
                     Text(item.name.capitalized)
                         .frame(maxWidth: .infinity, alignment: .leading)
-//                        .fontWeight(.medium)
                         .font(AppFont.caption)
                     Spacer()
                     ProgressBarView(progress: item.percentage)
@@ -36,6 +34,8 @@ struct PokemanStatsView: View {
             }
             Spacer()
         }
+        .padding()
+        .background(AppColors.Background.tertiary)
     }
 }
 

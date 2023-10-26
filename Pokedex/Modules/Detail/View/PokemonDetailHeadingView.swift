@@ -19,7 +19,7 @@ struct PokemonDetailHeadingView: View {
             HStack (alignment: .center, spacing: 20) {
                 
                 ImageViewWithGradient(imageURL: pokemonDetail.sprites.actualImage ?? "", gradientColors: pokemonDetail.gradientColors)
-                    .frame(width: geometry.size.width*0.4, height: geometry.size.height)
+                    .frame(width: geometry.size.width*0.5, height: geometry.size.height)
                 
                 VStack(alignment: .leading, spacing: 10) {
                     Text(pokemonSpices?.getFlavorText() ?? "")

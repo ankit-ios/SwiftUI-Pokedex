@@ -18,10 +18,14 @@ struct PokemonItemView: View {
                 VStack {
                     image
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(1.1, contentMode: .fit)
+                    
                     Text(pokemon.name.capitalized)
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
+                        .font(AppFont.body)
+                        .foregroundColor(AppColors.Text.primary)
+                    Text(String(format: "00%d", pokemonDetail.id))
+                        .font(AppFont.caption)
+                        .foregroundColor(AppColors.Text.primary)
                     Spacer()
                 }
             } placeholder: {

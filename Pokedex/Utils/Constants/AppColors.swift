@@ -9,8 +9,9 @@ import SwiftUI
 
 struct AppColors {
     struct Background {
-        static let primary = Color("#DEEDED")
-        static let secondary = Color("#C9DDE2")
+        static let primary = Color(hex: "#DEEDED")
+        static let secondary = Color(hex: "#C9DDE2")
+        static let tertiary = Color(hex: "#B0D2D2")
     }
     
     struct Text {
