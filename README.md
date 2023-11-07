@@ -28,3 +28,42 @@ The Pokedex app is a simple yet powerful tool for exploring information about va
 
 - **SSL Pinning**: To enhance security, the app implements SSL pinning, ensuring that it securely communicates with the backend servers. SSL pinning guards against potential man-in-the-middle attacks.
 
+## App Screenshots
+
+| App Logo                                | Splash Screen                                |
+| -------------------------------------- | ------------------------------------------- |
+| ![App Logo](Pokedex/Screenshots/appLogo.png) | ![Splash Screen](Pokedex/Screenshots/splashscreen.png) |
+
+
+
+| Pokemon List                                | Pagination                                |
+| -------------------------------------- | ------------------------------------------- |
+| ![Pokemon List](Pokedex/Screenshots/Listscreen.png) | ![Pagination](Pokedex/Screenshots/PagignationScreen.png) |
+
+
+| Search by name                                | Search by number                                |
+| -------------------------------------- | ------------------------------------------- |
+| ![Search by name](Pokedex/Screenshots/searchByName.png) | ![Search by number](Pokedex/Screenshots/searchByNumber.png) |
+
+
+
+| Detail Screen                                | Stats and evolution screen                                |
+| -------------------------------------- | ------------------------------------------- |
+| ![Detail Screen](Pokedex/Screenshots/DetailScreen.png) | ![Stats and evolution screen](https://github.com/ankit-ios/SwiftUI-Pokedex/blob/9ada6495e5d850666884e36b8b81de1107c41de1/Pokedex/Screenshots/Stats%20and%20evolution%20screen.png) |
+
+
+| Read more                                |
+| -------------------------------------- |
+| ![Read more](https://github.com/ankit-ios/SwiftUI-Pokedex/blob/9ada6495e5d850666884e36b8b81de1107c41de1/Pokedex/Screenshots/ReadMore%20screen.png) |
+
+
+
+| Filter Screen                                | Filter by gender                                |
+| -------------------------------------- | ------------------------------------------- |
+| ![Filter Screen](Pokedex/Screenshots/FilterScreen.png) | ![Filter by gender](Pokedex/Screenshots/FilterGender.png) |
+
+
+| Filter by type                                |
+| -------------------------------------- |
+| ![Filter by type](https://github.com/ankit-ios/SwiftUI-Pokedex/blob/9ada6495e5d850666884e36b8b81de1107c41de1/Pokedex/Screenshots/FilterType%20screen.png) |
+
