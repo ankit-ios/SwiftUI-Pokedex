@@ -19,4 +19,6 @@ struct AppImages {
     static let collapse = Image(systemName: "minus.circle")
     static let expand = Image(systemName: "plus.circle")
     static let filter = Image("filter")
+    static let back = Image(systemName: "arrow.backward")
+    static let right = Image(systemName: "arrow.right")
 }

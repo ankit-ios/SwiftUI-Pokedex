@@ -7,21 +7,23 @@
 
 import SwiftUI
 
-struct ButtonWithLabel: View {
-    let label: String
+struct ButtonWithLabel<LabelContent>: View where LabelContent: View {
+    let disabled: Bool
+    let label: () -> LabelContent
     let action: () -> Void
-
+    
     var body: some View {
         Button(action: action) {
-            Text(label)
-                .foregroundColor(.white)
-                .frame(height: 40)
-                .padding(.horizontal)
+            label()
         }
+        .frame(height: 40)
+        .padding(.horizontal)
+        .foregroundColor(.white)
         .background(
             RoundedRectangle(cornerRadius: 10)
-                .fill(AppColors.Text.primary)
+                .fill(disabled ? .gray : AppColors.Text.primary)
         )
         .padding()
+        .disabled(disabled)
     }
 }

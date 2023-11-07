@@ -10,8 +10,8 @@ import SwiftUI
 struct PokemanAbilityView: View {
     
     let pokemonDetail: PokemonDetail
-    @Binding var pokemonSpecies: PokemonSpeciesModel?
-    @Binding var pokemonTypeDetail: PokemonTypeDetailModel?
+    @Binding var pokemonSpecies: PokemonSpeciesViewModel?
+    @Binding var pokemonTypeDetail: PokemonTypeDetailViewModel?
     
     
     var body: some View {
@@ -44,9 +44,10 @@ struct PokemanAbilityView: View {
                                 .font(AppFont.caption)
                         }
                         .padding(.bottom)
-                        
                     }
-                    .frame(width: geometry.size.width * 0.5)
+                    .padding(.horizontal)
+                    
+                    Spacer()
                     
                     VStack(alignment: .leading) {
                         
@@ -115,7 +116,7 @@ struct PokemanAbilityView: View {
                         }
                     }
                     .frame(height: 30)
-                }.padding()
+                }.padding(.horizontal)
             }
         }
     }

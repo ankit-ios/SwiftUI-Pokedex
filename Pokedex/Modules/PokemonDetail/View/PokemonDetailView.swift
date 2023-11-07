@@ -6,41 +6,33 @@
 //
 
 import SwiftUI
+import FirebasePerformance
 
 struct PokemonDetailView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    
-    let pokemonItem: PokemonItem
-    let pokemonDetail: PokemonDetail
-    
     @Binding var isPokemonDetailPresented: Bool
-    @StateObject var viewModel: PokemonDetailViewModel
-    @StateObject var networkManager: NetworkManager
+    @ObservedObject var viewModel: PokemonDetailViewModel
     @State var isShowFullDetailPresented: Bool = false
-
-    init(pokemonItem: PokemonItem,
-         pokemonDetail: PokemonDetail,
-         isPokemonDetailPresented: Binding<Bool>,
-         networkManager: NetworkManager = NetworkManager.shared) {
-        
-        self.pokemonItem = pokemonItem
-        self.pokemonDetail = pokemonDetail
+    @State var trace: Trace?
+    
+    init(vm: PokemonDetailViewModel,
+         isPokemonDetailPresented: Binding<Bool>) {
+        self._viewModel = ObservedObject(wrappedValue: vm)
         self._isPokemonDetailPresented = isPokemonDetailPresented
-        self._viewModel = StateObject(wrappedValue: PokemonDetailViewModel())
-        self._networkManager = StateObject(wrappedValue: networkManager)
     }
     
     var body: some View {
         ScrollView {
+            let pokemonDetail  = viewModel.selectedPokemon
+            
             VStack {
-                
                 Spacer()
-                //Navigation view
-                NavigationHeaderView(model: NavigationHeaderItem(title: pokemonItem.name, subTitle: String(format: "00%d", pokemonDetail.id), isPresented: presentationMode))
+                // Navigation view
+                NavigationHeaderView(model: NavigationHeaderItem(title: pokemonDetail.name ?? "", subTitle: String(format: "%03d", pokemonDetail.id), isPresented: presentationMode))
                     .padding(.horizontal)
                 
-                //Heading view
+                // Heading view
                 PokemonDetailHeadingView(pokemonDetail: pokemonDetail, pokemonSpices: $viewModel.pokemonSpeciesModel) { fullFlavorTexts in
                     self.viewModel.fullFlavorTexts = fullFlavorTexts
                     self.isShowFullDetailPresented = true
@@ -50,26 +42,29 @@ struct PokemonDetailView: View {
 
                 Spacer()
                 
-                //Pokeman Ability view
+                // Pokeman Ability view
                 PokemanAbilityView(pokemonDetail: pokemonDetail, pokemonSpecies: $viewModel.pokemonSpeciesModel, pokemonTypeDetail: $viewModel.pokemonTypeDetailModel)
-                    .frame(height: 320)
+                    .frame(height: 260)
                     .padding()
                 Spacer()
                 
-                //Pokeman State view
-                PokemanStatsView(statsModel: PokemonStatsModel(pokemonDetail: pokemonDetail))
+                // Pokeman State view
+                PokemanStatsView(statsModel: PokemonStatsViewModel(pokemonDetail: pokemonDetail))
                     .frame(minHeight: 200, maxHeight: .infinity, alignment: .leading)
                     .padding(.bottom)
                 
                 Spacer()
                 
-                PokemanEvolutionChainView(pokemonDetail: pokemonDetail,
+                PokemanEvolutionChainView(selectedPokemonId: $viewModel.selectedPokemonId, pokemonNavigation: viewModel.getPokemonBottomNavigation(),
                                           pokemonEvolutionChainItemList: $viewModel.pokemonEvolutionChainItemList)
                 .frame(height: 250)
                 .padding()
-            } //Outer VStack
+            } // Outer VStack
             .onAppear {
-                viewModel.fetchPokemonData(pokemonId: pokemonDetail.id, from: networkManager)
+                self.trace = Performance.startTrace(name: "detail_view")
+            }
+            .onDisappear {
+                trace?.stop()
             }
         }
         .background(AppColors.Background.primary)
@@ -85,11 +80,18 @@ struct PokemonDetailView: View {
             .presentationCornerRadius(20)
             .presentationDragIndicator(.visible)
         }
+        .alert(isPresented: $viewModel.alertModel.isShowing) {
+            Alert(
+                title: Text(viewModel.alertModel.title),
+                message: Text(viewModel.alertModel.message),
+                dismissButton: .default(Text("OK"))
+            )
+        }
     }
 }
 
-struct PokemonDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        PokemonDetailView(pokemonItem: .init(name: "ankit", url: ""), pokemonDetail: PokemonDetail.dummy, isPokemonDetailPresented: .constant(false))
-    }
-}
+//struct PokemonDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PokemonDetailView(selectedPokemonId: .constant(-1), selectedPokemon: .dummy, allPokemonDetails: [:], isPokemonDetailPresented: .constant(false))
+//    }
+//}

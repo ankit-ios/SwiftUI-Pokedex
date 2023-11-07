@@ -9,9 +9,9 @@ import SwiftUI
 
 struct PokemanStatsView: View {
     
-    let statsModel: PokemonStatsModel
+    let statsModel: PokemonStatsViewModel
     
-    private var stats: [PokemonStatsModel.Stats] {
+    private var stats: [PokemonStatsViewModel.Stats] {
         statsModel.getPokemenStats()
     }
     

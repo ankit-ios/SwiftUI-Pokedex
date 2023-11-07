@@ -7,7 +7,7 @@
 
 import Foundation
 
-//MARK: - Species
+// MARK: - Species
 
 struct PokemonSpecies: Decodable {
     let eggGroup: [PokemonNameURL]?

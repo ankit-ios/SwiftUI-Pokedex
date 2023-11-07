@@ -34,4 +34,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         FirebaseApp.configure()
         PokemonGenderManager.shared.fetchGenderData()
     }
+    
+    //Added for firebase metrix
+    func applicationWillResignActive(_ application: UIApplication) {
+    }
+    func applicationDidBecomeActive(_ application: UIApplication) {
+    }
 }

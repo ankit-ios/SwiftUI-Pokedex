@@ -40,7 +40,13 @@ final class HomeViewUITests: XCTestCase {
     
     func test_pokemon_list_search() throws {
         let app = XCUIApplication()
-        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.tap()
+        app.children(matching: .window).element(boundBy: 0)
+            .children(matching: .other).element.children(matching: .other).element
+            .children(matching: .other).element.children(matching: .other).element
+            .children(matching: .other).element.children(matching: .other).element
+            .children(matching: .other).element.children(matching: .other).element
+            .children(matching: .other).element.children(matching: .other).element
+            .children(matching: .other).element.tap()
         
         let closeImage = app.images["Close"]
         closeImage.tap()

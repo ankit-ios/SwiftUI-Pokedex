@@ -21,7 +21,7 @@ struct PokemonEvolutionChainModel {
         return getSpecies(from: chain)
     }
     
-    ///private recursive func to get all secies from `chain`
+    ///private recursive func to get all species from `chain`
     private func getSpecies(from chain: PokemonEvolutionChain.Chain) -> [PokemonNameURL] {
         var allSpecies: [PokemonNameURL] = []
         guard let species = chain.species else { return allSpecies }

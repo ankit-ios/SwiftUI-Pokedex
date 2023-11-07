@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebasePerformance
 
 struct HomeView: View {
     
@@ -13,30 +14,34 @@ struct HomeView: View {
     @State private var isPokemonDetailPresented = false // To control the filter sheet
     
     @State private var scrolledToBottom = false
+    @State private var selectedPokemonId = -1
     
-    
-    @StateObject var viewModel = HomeViewModel()
-    @StateObject var networkManager = NetworkManager.shared
+    @StateObject var viewModel: HomeViewModel
+    @State var trace: Trace?
     
     let columns: [GridItem] = [
         GridItem(.adaptive(minimum: 150)),
         GridItem(.adaptive(minimum: 150))
     ]
     
+    init() {
+        self._viewModel = StateObject(wrappedValue: .init(pokemonListService: PokemonListServiceManager(.shared)))
+    }
+    
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
-                //divider
+                // divider
                 Divider()
                     .frame(height: 1)
                     .background(.gray)
                 
-                //top label
+                // top label
                 Text(HomeScreenLabels.searchLabel)
                 
                 HStack {
                     
-                    //search bar
+                    // search bar
                     SearchBar(searchText: $viewModel.searchQuery, searchAction: {
                         viewModel.performSearch()
                     })
@@ -59,60 +64,72 @@ struct HomeView: View {
                 
                 // Pokeman list
                 ScrollView {
-                    ScrollViewReader { proxy in
-                        
-                        LazyVGrid(columns: columns, alignment: .leading, spacing: 20) { // Set spacing here
-                            ForEach(viewModel.filteredPokemons, id: \.name) { item in
-                                let itemDetail = viewModel.getPokemonDetail(for: item) ?? .dummy
-                                
-                                NavigationLink {
-                                    //TODO:
-                                    PokemonDetailView(pokemonItem: item, pokemonDetail: itemDetail, isPokemonDetailPresented: $isPokemonDetailPresented)
-                                } label: {
-                                    PokemonItemView(pokemon: item, pokemonDetail: itemDetail)
-                                        .frame(maxWidth: .infinity, alignment: .center)
-                                        .frame(height: 200)
-                                        .dottedBorder(color: .black, lineWidth: 1, dash: [5, 5], cornerRadius: 12)
-                                        .onAppear {
-                                            // pagignation logic
-                                            if viewModel.hasReachedEnd(of: item) {
-                                                withAnimation {
-                                                    viewModel.fetchNextPagePokemonList(from: networkManager)
-                                                }
-                                            }
-                                        }
+                    LazyVGrid(columns: columns, alignment: .leading, spacing: 20) { // Set spacing here
+                        ForEach(viewModel.filteredPokemons, id: \.name) { item in
+                            let pokemonItem = viewModel.getPokemonDetail(for: item)
+                            PokemonItemView(pokemon: pokemonItem)
+                                .frame(height: 200)
+                                .id(item.name)
+                                .onAppear { handlePagignation(item) }
+                                .onTapGesture {
+                                    selectedPokemonId = pokemonItem?.id ?? -1
                                 }
-                                .onAppear {
-                                    viewModel.fetchPokemonItemImage(item, from: networkManager)
-                                }
-                            }
                         }
                     }
                     .padding()
                 }
                 .overlay(alignment: .bottom, content: {
-                    if viewModel.isFetchingData {
-                        Text(HomeScreenLabels.loadingMore)
-                            .padding()
-                            .font(AppFont.caption)
-                            .foregroundColor(.white)
-                            .background(AppColors.Text.primary)
-                            .transition(.opacity)
-                            .cornerRadius(12)
-                            .shadow(color: .black.opacity(0.5), radius: 12, x: 0, y: 10)
-                    }
+                    LoadingView(show: $viewModel.isFetchingData)
                 })
                 Spacer()
             }
+            .onChange(of: selectedPokemonId) { newValue in
+                if newValue != -1 {
+                    isPokemonDetailPresented = true
+                }
+            }
+            
+            // Firebase tracing
+            .onAppear { trace = Performance.startTrace(name: "home_view") }
+            .onDisappear { trace?.stop() }
+            
             .padding()
             .background(AppColors.Background.primary)
             .navigationTitle(AppScreenTitles.home)
+            
+            // Filter popup
             .sheet(isPresented: $isFilterSheetPresented) {
                 FilterView(isFilterSheetPresented: $isFilterSheetPresented)
             }
+            
+            // Detail screen
+            .fullScreenCover(isPresented: $isPokemonDetailPresented) {
+                let p = viewModel.getPokemon(for: selectedPokemonId)
+                if let detail = p.detail {
+                    let vm = PokemonDetailViewModel(
+                        pokemonDetailService: PokemonDetailServiceManager(.shared),
+                        selectedPokemonId: $selectedPokemonId,
+                        selectedPokemon: detail,
+                        allPokemonDetails: viewModel.pokemonsDetails)
+                    PokemonDetailView(vm: vm, isPokemonDetailPresented: $isPokemonDetailPresented)
+                }
+            }
         }
         .onAppear {
-            viewModel.fetchPokemonList(from: networkManager)
+            Task {
+                await viewModel.fetchPokemonList()
+            }
+        }
+    }
+    
+    private func handlePagignation(_ item: PokemonItem) {
+        Task {
+            await viewModel.fetchPokemonItemDetail(item)
+            
+            // pagignation logic
+            if viewModel.hasReachedEnd(of: item) {
+                await viewModel.fetchNextPagePokemonList()
+            }
         }
     }
 }
@@ -122,4 +139,3 @@ struct HomeView_Previews: PreviewProvider {
         HomeView()
     }
 }
-

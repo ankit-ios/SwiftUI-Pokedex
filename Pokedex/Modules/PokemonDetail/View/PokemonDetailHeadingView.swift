@@ -10,13 +10,12 @@ import SwiftUI
 struct PokemonDetailHeadingView: View {
     
     let pokemonDetail: PokemonDetail
-    @Binding var pokemonSpices: PokemonSpeciesModel?
-    let showFullDescriptionView: ((String) -> ())
-    
+    @Binding var pokemonSpices: PokemonSpeciesViewModel?
+    let showFullDescriptionView: ((String) -> (Void))
     
     var body: some View {
         GeometryReader { geometry in
-            HStack (alignment: .center, spacing: 20) {
+            HStack(alignment: .center, spacing: 20) {
                 
                 ImageViewWithGradient(imageURL: pokemonDetail.sprites.actualImage ?? "", gradientColors: pokemonDetail.gradientColors)
                     .frame(width: geometry.size.width*0.5, height: geometry.size.height)
@@ -28,7 +27,7 @@ struct PokemonDetailHeadingView: View {
                         .lineLimit(nil)
                         .padding(.top, 8)
                     
-                    //read more button
+                    // read more button
                     Button(action: {
                         showFullDescriptionView(pokemonSpices?.getFullFlavorTexts() ?? "")
                     }) {
@@ -39,6 +38,7 @@ struct PokemonDetailHeadingView: View {
                     }
                     Spacer()
                 }
+                .animation(.default)
             }
         }
     }

@@ -9,7 +9,7 @@ import Foundation
 
 enum PokemonApi: APIRequest {
     case list(offset: Int, limit: Int)
-    case detail(pokemonId: Any) ///`id` can be String or Int
+    case detail(pokemonId: Any) /// `id` can be String or Int
     case gender(type: String)
     case species(pokemonId: Int)
     case type(pokemonId: Int)

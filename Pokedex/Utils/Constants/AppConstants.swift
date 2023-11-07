@@ -8,6 +8,7 @@
 import Foundation
 
 typealias HTTPMethod = AppConstants.API.HTTPMethod
+typealias APIResponse<T: Decodable, E: Error> = (Result<T, E>) -> Void
 
 enum User: String {
     case `default` = "Guest"

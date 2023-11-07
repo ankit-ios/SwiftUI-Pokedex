@@ -19,6 +19,13 @@ extension String {
             return nil
         }
     }
+    
+    func getId() -> Int? {
+        guard let url = URL(string: self),
+              let id = Int(url.lastPathComponent)
+        else { return nil }
+        return id
+    }
 }
 
 //MARK: - View Extension
@@ -76,5 +83,18 @@ extension Image {
             .frame(width: newSize.width, height: newSize.height)
             .clipped()
         return ImageRenderer(content: image).uiImage
+    }
+}
+
+//MARK: - LabelStyle
+struct TitleIconLabelStyle: LabelStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            configuration.title
+                .font(AppFont.caption)
+                .foregroundColor(.white)
+            configuration.icon
+                .foregroundColor(.white)
+        }
     }
 }

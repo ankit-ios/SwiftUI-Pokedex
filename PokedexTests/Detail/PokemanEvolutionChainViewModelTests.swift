@@ -8,32 +8,32 @@
 import XCTest
 @testable import Pokedex
 
-
 class PokemanEvolutionChainViewModelTests: XCTestCase {
+
     var viewModel: PokemanEvolutionChainViewModel!
-    
+    let testPokemonDetail: PokemonDetail = .dummy
+
     override func setUp() {
         super.setUp()
-//        let testPokemonDetail = PokemonDetail(id: 5, name: "TestMon")
-//        viewModel = PokemanEvolutionChainViewModel(pokemonDetail: testPokemonDetail)
+        viewModel = PokemanEvolutionChainViewModel(pokemonDetail: testPokemonDetail)
     }
-    
+
     override func tearDown() {
         viewModel = nil
         super.tearDown()
     }
-    
-    func testGetPreviousPokemanId() {
-        // Test when the current Pokemon ID is greater than 1
-        XCTAssertEqual(viewModel.getPreviousPokemanId(), 4)
-        
-        // Test when the current Pokemon ID is 1
-//        let pokemonDetailWithId1 = PokemonDetail(id: 1, name: "FirstMon")
-//        let viewModelWithId1 = PokemanEvolutionChainViewModel(pokemonDetail: pokemonDetailWithId1)
-//        XCTAssertNil(viewModelWithId1.getPreviousPokemanId())
+
+    func test_get_previous_pokeman_id_nil() {
+        XCTAssertNil(self.viewModel.getPreviousPokemanId())
     }
-    
-    func testGetNextPokemanId() {
-        XCTAssertEqual(viewModel.getNextPokemanId(), 6)
+
+    func test_get_previous_pokeman_id() {
+        viewModel = .init(pokemonDetail: .init(id: 10, name: "", height: 100, weight: 200,
+                                               sprites: .dummy, types: [], abilities: [], stats: []))
+        XCTAssertEqual(self.viewModel.getPreviousPokemanId(), 9)
+    }
+
+    func test_get_next_pokeman_id() {
+        XCTAssertEqual(self.viewModel.getNextPokemanId(), 2)
     }
 }

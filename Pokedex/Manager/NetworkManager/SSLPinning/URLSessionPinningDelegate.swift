@@ -17,11 +17,6 @@ class URLSessionPinningDelegate: NSObject, URLSessionDelegate {
     }
 
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        
-        //Now by passing SSL pinning
-        completionHandler(.useCredential, URLCredential(trust: challenge.protectionSpace.serverTrust!))
-        return
-        /*
         if let serverTrust = challenge.protectionSpace.serverTrust,
            let serverCertificate = SecTrustGetCertificateAtIndex(serverTrust, 0) {
             let serverCertificateData = SecCertificateCopyData(serverCertificate) as Data
@@ -31,6 +26,5 @@ class URLSessionPinningDelegate: NSObject, URLSessionDelegate {
             }
         }
         completionHandler(.cancelAuthenticationChallenge, nil)
-         */
     }
 }

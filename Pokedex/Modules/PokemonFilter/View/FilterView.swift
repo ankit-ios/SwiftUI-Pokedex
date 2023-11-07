@@ -13,8 +13,9 @@ struct FilterView: View {
     
     let data: [AccordianModel] = [
         .init(title: "Type", items: PokemonType.allCases.map { $0.rawValue }),
-        .init(title: "Gender", items: ["Male", "Female"]),
-        .init(title: "Stats", items: ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 42", "Item 53", "Item 64", "Item 72"])
+        .init(title: "Gender", items: PokemonGender.allCases.map { $0.rawValue })
+//        ,
+//        .init(title: "Stats", items: ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 42", "Item 53", "Item 64", "Item 72"])
     ]
     
     @State private var isTypeExpanded = false
@@ -33,7 +34,7 @@ struct FilterView: View {
                     ScrollView {
                         AccordionView(model: data[0], isExpanded: $isTypeExpanded, checkedItems: $typeCheckedItems)
                         AccordionView(model: data[1], isExpanded: $isGenderExpanded, checkedItems: $genderCheckedItems)
-                        AccordionView(model: data[2], isExpanded: $isStatsExpanded, checkedItems: $statsCheckedItems)
+//                        AccordionView(model: data[2], isExpanded: $isStatsExpanded, checkedItems: $statsCheckedItems)
                         Spacer()
                         
                     }

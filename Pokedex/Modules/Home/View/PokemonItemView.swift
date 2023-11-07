@@ -8,36 +8,43 @@
 import SwiftUI
 
 struct PokemonItemView: View {
-    let pokemon: PokemonItem
-    let pokemonDetail: PokemonDetail
+    let pokemon: PokemonDetail?
     
     var body: some View {
         
         VStack {
-            AsyncImage(url: URL(string: (pokemonDetail.sprites.thumbnail?.isEmpty ?? true) ? "" : pokemonDetail.sprites.thumbnail!)) { image in
+            if let pokemon = pokemon {
                 VStack {
-                    image
-                        .resizable()
-                        .aspectRatio(1.1, contentMode: .fit)
-                    
-                    Text(pokemon.name.capitalized)
+                    Spacer()
+                    AsyncImage(url: URL(string: pokemon.sprites.thumbnail ?? "")) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(1.1, contentMode: .fit)
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    Spacer()
+                    Text(pokemon.name?.capitalized ?? "")
                         .font(AppFont.body)
                         .foregroundColor(AppColors.Text.primary)
-                    Text(String(format: "00%d", pokemonDetail.id))
+                    Text(String(format: "%03d", pokemon.id))
                         .font(AppFont.caption)
                         .foregroundColor(AppColors.Text.primary)
-                    Spacer()
                 }
-            } placeholder: {
+                .padding(.vertical)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .addGradient(colors: pokemon.gradientColors)
+                .dottedBorder(color: .black, lineWidth: 1, dash: [5, 5], cornerRadius: 12)
+            } else {
                 ProgressView()
+                    .frame(maxWidth: .infinity, alignment: .center)
             }
-            .addGradient(colors: pokemonDetail.gradientColors)
         }
     }
 }
 
 struct PokemonItemView_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonItemView(pokemon: .init(name: "kakuna", url: "https://pokeapi.co/api/v2/pokemon/14/"), pokemonDetail: .dummy)
+        PokemonItemView(pokemon: .dummy)
     }
 }

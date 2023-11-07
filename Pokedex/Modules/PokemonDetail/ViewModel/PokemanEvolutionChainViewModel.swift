@@ -9,17 +9,37 @@ import Foundation
 
 class PokemanEvolutionChainViewModel: ObservableObject {
     
-    let pokemonDetail: PokemonDetail
+    private let pokemonNavigation: PokemonBottomNavigation
     
-    init(pokemonDetail: PokemonDetail) {
-        self.pokemonDetail = pokemonDetail
+    init(pokemonNavigation: PokemonBottomNavigation) {
+        self.pokemonNavigation = pokemonNavigation
+    }
+    
+    func selectedPokemon() -> PokemonDetail {
+        pokemonNavigation.selectedPokemon
     }
     
     func getPreviousPokemanId() -> Int? {
-        (pokemonDetail.id > 1) ? (pokemonDetail.id - 1) : nil
+        (selectedPokemon().id > 1) ? (selectedPokemon().id - 1) : nil
     }
     
     func getNextPokemanId() -> Int {
-        (pokemonDetail.id + 1)
+        (selectedPokemon().id + 1)
+    }
+    
+    func getPreviousPokemanName() -> String {
+        pokemonNavigation.previousPokemon?.capitalized ?? ""
+    }
+    
+    func getNextPokemanName() -> String {
+        pokemonNavigation.nextPokemon?.capitalized ?? ""
+    }
+    
+    func shouldDisablePreviousButton() -> Bool {
+        getPreviousPokemanName().isEmpty
+    }
+    
+    func shouldDisableNextButton() -> Bool {
+        getNextPokemanName().isEmpty
     }
 }

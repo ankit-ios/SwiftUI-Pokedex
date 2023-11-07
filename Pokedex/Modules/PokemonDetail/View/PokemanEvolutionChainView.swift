@@ -9,20 +9,20 @@ import SwiftUI
 
 struct PokemanEvolutionChainView: View {
     
-    let pokemonDetail: PokemonDetail
     let viewmodel: PokemanEvolutionChainViewModel
     @Binding var pokemonEvolutionChainItemList: [PokemonEvolutionChainItem]?
+    @Binding var selectedPokemonId: Int
     
-    
-    init(pokemonDetail: PokemonDetail,
+    init(selectedPokemonId: Binding<Int>,
+         pokemonNavigation: PokemonBottomNavigation,
          pokemonEvolutionChainItemList: Binding<[PokemonEvolutionChainItem]?>) {
-        self.pokemonDetail = pokemonDetail
-        self.viewmodel = PokemanEvolutionChainViewModel(pokemonDetail: pokemonDetail)
+        self._selectedPokemonId = selectedPokemonId
+        self.viewmodel = PokemanEvolutionChainViewModel(pokemonNavigation: pokemonNavigation)
         self._pokemonEvolutionChainItemList = pokemonEvolutionChainItemList
     }
     
     var body: some View {
-        GeometryReader { geometryProxy in
+        GeometryReader { _ in
             VStack(alignment: .leading) {
                 Text(DetailScreenLabels.evolutionChainLabel)
                     .font(AppFont.subtitle)
@@ -45,25 +45,34 @@ struct PokemanEvolutionChainView: View {
                 Spacer()
                 
                 HStack(alignment: .center) {
-                    ButtonWithLabel(label: DetailScreenLabels.previousLabel) {
+                    ButtonWithLabel(disabled: viewmodel.shouldDisablePreviousButton()) {
+                        Label(viewmodel.getPreviousPokemanName(), systemImage: "arrow.backward")
+                    } action: {
                         if let id = viewmodel.getPreviousPokemanId() {
-                            print(id)
+                            updateSelectPokemonID(id)
                         }
                     }
-                    
                     Spacer()
-                    
-                    ButtonWithLabel(label: DetailScreenLabels.nextLabel) {
-                        print(viewmodel.getNextPokemanId())
+                    ButtonWithLabel(disabled: viewmodel.shouldDisableNextButton()) {
+                        Label(viewmodel.getNextPokemanName(), systemImage: "arrow.right")
+                            .labelStyle(TitleIconLabelStyle())
+                    } action: {
+                        updateSelectPokemonID(viewmodel.getNextPokemanId())
                     }
                 }
             }
         }
     }
+    
+    func updateSelectPokemonID(_ id: Int) {
+        selectedPokemonId = id
+    }
 }
 
 struct PokemanEvolutionChainView_Previews: PreviewProvider {
     static var previews: some View {
-        PokemanEvolutionChainView.init(pokemonDetail: .dummy, pokemonEvolutionChainItemList: .constant(nil))
+        PokemanEvolutionChainView(selectedPokemonId: .constant(2),
+                                  pokemonNavigation: .init(previousPokemon: nil, nextPokemon: nil, selectedPokemon: .dummy),
+                                  pokemonEvolutionChainItemList: .constant(nil))
     }
 }
