@@ -28,6 +28,11 @@ The Pokedex app is a simple yet powerful tool for exploring information about va
 
 - **SSL Pinning**: To enhance security, the app implements SSL pinning, ensuring that it securely communicates with the backend servers. SSL pinning guards against potential man-in-the-middle attacks.
 
+## App Demo
+![Demo](https://github.com/ankit-ios/SwiftUI-Pokedex/blob/b6bde2695ac5b1ff6fcc790fa74ec4447a2ec1cd/Pokedex/Screenshots/Apprecording.gif)
+
+[Full app recording video](https://drive.google.com/file/d/1G9omCltH92mtCsXBqYPsLIsGmlI52qef/view?usp=share_link)
+
 ## App Screenshots
 
 | App Logo                                | Splash Screen                                |
@@ -54,7 +59,7 @@ The Pokedex app is a simple yet powerful tool for exploring information about va
 
 | Read more                                |
 | -------------------------------------- |
-| ![Read more](https://github.com/ankit-ios/SwiftUI-Pokedex/blob/9ada6495e5d850666884e36b8b81de1107c41de1/Pokedex/Screenshots/ReadMore%20screen.png) |
+| ![Read more](https://github.com/ankit-ios/SwiftUI-Pokedex/blob/b6bde2695ac5b1ff6fcc790fa74ec4447a2ec1cd/Pokedex/Screenshots/ReadMore%20screen.png) |
 
 
 
