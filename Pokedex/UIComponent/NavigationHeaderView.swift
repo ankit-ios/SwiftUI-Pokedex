@@ -11,6 +11,7 @@ struct NavigationHeaderItem {
     let title: String
     let subTitle: String
     @Binding var isPresented: PresentationMode
+    var close: (() -> Void)?
 }
 
 struct NavigationHeaderView: View {
@@ -20,8 +21,10 @@ struct NavigationHeaderView: View {
     var body: some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading) {
-                Text(model.title.uppercased())
-                Text(model.subTitle)
+                Text(model.title)
+                if !model.subTitle.isEmpty {
+                    Text(model.subTitle)
+                }
             }
             .font(AppFont.navigationTitle)
             .foregroundColor(AppColors.Text.primary)
@@ -29,6 +32,7 @@ struct NavigationHeaderView: View {
             Spacer()
             Button(action: {
                 model.$isPresented.wrappedValue.dismiss()
+                model.close?()
             }) {
                 AppImages.close
                     .resizable()

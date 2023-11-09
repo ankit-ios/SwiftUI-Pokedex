@@ -22,17 +22,23 @@ struct PokemanEvolutionChainView: View {
     }
     
     var body: some View {
-        GeometryReader { _ in
-            VStack(alignment: .leading) {
-                Text(DetailScreenLabels.evolutionChainLabel)
-                    .font(AppFont.subtitle)
-                    .fontWeight(.bold)
+        VStack(alignment: .leading) {
+            Text(DetailScreenLabels.evolutionChainLabel)
+                .font(AppFont.subtitle)
+                .fontWeight(.bold)
+            
+            if pokemonEvolutionChainItemList?.isEmpty ?? true {
+                Spacer()
+                ProgressView()
+                    .frame(maxWidth: .infinity, alignment: .center)
+            } else {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 10) {
+                    HStack(spacing: 0) {
                         ForEach(pokemonEvolutionChainItemList ?? [], id: \.id) { item in
                             ImageViewWithGradient(imageURL: item.imageUrl ?? "", gradientColors: item.gradientColors)
                                 .aspectRatio(0.7, contentMode: .fit)
+                                .padding(.all, 8)
                             
                             if pokemonEvolutionChainItemList?.last?.id != item.id {
                                 AppImages.rightArrow
@@ -41,24 +47,24 @@ struct PokemanEvolutionChainView: View {
                         }
                     }
                 }
-                
+            }
+            
+            Spacer()
+            
+            HStack(alignment: .center) {
+                ButtonWithLabel(disabled: viewmodel.shouldDisablePreviousButton()) {
+                    Label(viewmodel.getPreviousPokemanName(), systemImage: "arrow.backward")
+                } action: {
+                    if let id = viewmodel.getPreviousPokemanId() {
+                        updateSelectPokemonID(id)
+                    }
+                }
                 Spacer()
-                
-                HStack(alignment: .center) {
-                    ButtonWithLabel(disabled: viewmodel.shouldDisablePreviousButton()) {
-                        Label(viewmodel.getPreviousPokemanName(), systemImage: "arrow.backward")
-                    } action: {
-                        if let id = viewmodel.getPreviousPokemanId() {
-                            updateSelectPokemonID(id)
-                        }
-                    }
-                    Spacer()
-                    ButtonWithLabel(disabled: viewmodel.shouldDisableNextButton()) {
-                        Label(viewmodel.getNextPokemanName(), systemImage: "arrow.right")
-                            .labelStyle(TitleIconLabelStyle())
-                    } action: {
-                        updateSelectPokemonID(viewmodel.getNextPokemanId())
-                    }
+                ButtonWithLabel(disabled: viewmodel.shouldDisableNextButton()) {
+                    Label(viewmodel.getNextPokemanName(), systemImage: "arrow.right")
+                        .labelStyle(TitleIconLabelStyle())
+                } action: {
+                    updateSelectPokemonID(viewmodel.getNextPokemanId())
                 }
             }
         }
@@ -71,8 +77,20 @@ struct PokemanEvolutionChainView: View {
 
 struct PokemanEvolutionChainView_Previews: PreviewProvider {
     static var previews: some View {
+        let image = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+        let image1 = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"
+        let image2 = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+        
         PokemanEvolutionChainView(selectedPokemonId: .constant(2),
                                   pokemonNavigation: .init(previousPokemon: nil, nextPokemon: nil, selectedPokemon: .dummy),
-                                  pokemonEvolutionChainItemList: .constant(nil))
+                                  pokemonEvolutionChainItemList:
+                .constant([
+                    .init(id: 2, imageUrl: image,
+                          gradientColors: [PokemonType.water.color]),
+                    .init(id: 3, imageUrl: image1,
+                          gradientColors: [PokemonType.fire.color]),
+                    .init(id: 1, imageUrl: image2,
+                          gradientColors: [PokemonType.dark.color])
+                ]))
     }
 }

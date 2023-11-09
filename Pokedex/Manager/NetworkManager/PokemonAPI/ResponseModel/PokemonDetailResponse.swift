@@ -86,7 +86,7 @@ extension PokemonDetail {
     static let dummy: PokemonDetail = .init(id: 1, name: "bulbasaur", height: 122, weight: 233,
                                             sprites: .dummy,
                                             types: [.dummy],
-                                            abilities: [.dummy],
+                                            abilities: [.dummy, .dummy, .dummy],
                                             stats: [.dummy, .dummy1, .dummy2])
 }
 

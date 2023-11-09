@@ -37,3 +37,12 @@ extension PokemonType {
         Color(self.rawValue)
     }
 }
+
+enum PokemonStat: String, CaseIterable {
+    case hp
+    case attack
+    case defense
+    case specialAttack = "special-attack"
+    case specialDefense = "special-defense"
+    case speed
+}

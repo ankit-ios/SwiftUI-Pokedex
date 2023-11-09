@@ -30,7 +30,7 @@ struct PokemanAbilityView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text(DetailScreenLabels.genderLabel)
                                 .font(AppFont.body)
-                            Text("\(PokemonGenderManager.shared.getGender(for: pokemonDetail.name ?? ""))").font(AppFont.caption)
+                            Text("\(PokemonGenderManager.shared.getGenders(for: pokemonDetail.name ?? "").joined(separator: ", "))").font(AppFont.caption)
                         }
                         .padding(.bottom)
                         
@@ -42,6 +42,7 @@ struct PokemanAbilityView: View {
                                 .joined(separator: ", ")
                             Text("\(abilitiesArr)")
                                 .font(AppFont.caption)
+                                .lineLimit(2)
                         }
                         .padding(.bottom)
                     }

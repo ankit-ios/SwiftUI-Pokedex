@@ -6,84 +6,74 @@
 //
 
 import SwiftUI
+import FirebasePerformance
 
 struct FilterView: View {
+    
+    @Environment(\.presentationMode) var presentationMode
+    @StateObject var vm: FilterViewModel
     @Binding var isFilterSheetPresented: Bool
-    @State private var selectedFilter = "None"
+    @State var trace: Trace?
     
-    let data: [AccordianModel] = [
-        .init(title: "Type", items: PokemonType.allCases.map { $0.rawValue }),
-        .init(title: "Gender", items: PokemonGender.allCases.map { $0.rawValue })
-//        ,
-//        .init(title: "Stats", items: ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 42", "Item 53", "Item 64", "Item 72"])
-    ]
-    
-    @State private var isTypeExpanded = false
-    @State private var isGenderExpanded = false
-    @State private var isStatsExpanded = false
-    
-    @State var typeCheckedItems: [String: Bool] = [:]
-    @State var genderCheckedItems: [String: Bool] = [:]
-    @State var statsCheckedItems: [String: Bool] = [:]
-    
+    init(isFilterSheetPresented: Binding<Bool>, filterModel: Binding<FilterModel>) {
+        self._isFilterSheetPresented = isFilterSheetPresented
+        self._vm = StateObject(wrappedValue: .init(filterModel: filterModel))
+    }
     
     var body: some View {
-        NavigationView {
-            GeometryReader { geometry in
-                VStack {
-                    ScrollView {
-                        AccordionView(model: data[0], isExpanded: $isTypeExpanded, checkedItems: $typeCheckedItems)
-                        AccordionView(model: data[1], isExpanded: $isGenderExpanded, checkedItems: $genderCheckedItems)
-//                        AccordionView(model: data[2], isExpanded: $isStatsExpanded, checkedItems: $statsCheckedItems)
-                        Spacer()
-                        
-                    }
-                    .padding()
-                    
-                    HStack {
-                        Button(FilterScreenLabels.resetButton) {
-                            
-                        }
-                        .font(.title)
-                        .padding(.vertical, 10)
-                        .padding(.horizontal, 30)
-                        .frame(width: geometry.size.width * 0.4)
-                        .background(.white)
-                        .foregroundColor(.blue)
-                        .cornerRadius(12)
-
-                        
-                        Spacer()
-                        Button(FilterScreenLabels.applyButton) {
-                            
-                        }
-                        .font(.title)
-                        .padding(.vertical, 10)
-                        .padding(.horizontal, 30)
-                        .frame(width: geometry.size.width * 0.4)
-                        .background(.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
-                        
-                    }
-                    .padding(.horizontal, 10)
-                    .padding()
-                    .shadow(color: .gray.opacity(0.5), radius: 10, x: 0, y: -10)
-                }
+        VStack {
+            Spacer()
+            NavigationHeaderView(model: NavigationHeaderItem(title: AppScreenTitles.filter, subTitle: "", isPresented: presentationMode, close: {
+                isFilterSheetPresented = false
+            })).padding(.horizontal)
+            
+            ScrollView {
+                AccordionView(model: vm.getTypeData(), isExpanded: $vm.isTypeExpanded, checkedItems: $vm.typeCheckedItems)
+                AccordionView(model: vm.getGenderData(), isExpanded: $vm.isGenderExpanded, checkedItems: $vm.genderCheckedItems)
+                Spacer()
             }
-            .navigationBarTitle(AppScreenTitles.filter)
-            .navigationBarItems(
-                trailing: Button(FilterScreenLabels.cancelButton) {
+            .padding()
+            
+            HStack {
+                Button(FilterScreenLabels.resetButton) {
+                    vm.resetButtonTapped()
                     isFilterSheetPresented = false
                 }
+                .buttonStyle(SecondaryButtonStyle())
+                
+                Spacer()
+                Button(FilterScreenLabels.applyButton) {
+                    vm.applyButtonTapped()
+                    isFilterSheetPresented = false
+                }
+                .buttonStyle(PrimaryButtonStyle())
+            }
+            .padding(.horizontal, 40)
+            .padding(.top, 10)
+            .background(AppColors.Background.primary)
+            .background(
+                Rectangle()
+                    .fill(.white)
+                    .shadow(color: AppColors.Text.primary.opacity(0.3), radius: 4, x: 0, y: -4)
             )
+            Spacer()
         }
+        .background(AppColors.Background.primary)
+        
+        // Firebase tracing
+        .onAppear {
+            trace = Performance.startTrace(name: "filter_view")
+            vm.updateUIWithSelectedFilter()
+        }
+        .onDisappear { trace?.stop() }
+        .cornerRadius(8)
+        .frame(width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height * 0.8)
     }
 }
 
 
 struct FilterView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterView(isFilterSheetPresented: .constant(false))
+        FilterView(isFilterSheetPresented: .constant(false), filterModel: .constant(.init()))
     }
 }

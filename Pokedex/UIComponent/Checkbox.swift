@@ -18,6 +18,8 @@ struct CheckboxView: View {
                 (isChecked ? AppImages.checkboxFill : AppImages.checkbox)
             }
             Text(text)
+                .font(AppFont.caption)
         }
+        .foregroundColor(AppColors.Text.primary)
     }
 }

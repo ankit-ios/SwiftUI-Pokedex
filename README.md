@@ -37,38 +37,37 @@ The Pokedex app is a simple yet powerful tool for exploring information about va
 
 | App Logo                                | Splash Screen                                |
 | -------------------------------------- | ------------------------------------------- |
-| ![App Logo](Pokedex/Screenshots/appLogo.png) | ![Splash Screen](Pokedex/Screenshots/splashscreen.png) |
+| ![App Logo](Pokedex/Screenshots/1_AppLogo.png) | ![Splash Screen](Pokedex/Screenshots/2_Splashscreen.png) |
 
 
 
 | Pokemon List                                | Pagination                                |
 | -------------------------------------- | ------------------------------------------- |
-| ![Pokemon List](Pokedex/Screenshots/Listscreen.png) | ![Pagination](Pokedex/Screenshots/PagignationScreen.png) |
+| ![Pokemon List](Pokedex/Screenshots/3_Listscreen.png) | ![Pagination](Pokedex/Screenshots/4_PagignationScreen.png) |
 
 
 | Search by name                                | Search by number                                |
 | -------------------------------------- | ------------------------------------------- |
-| ![Search by name](Pokedex/Screenshots/searchByName.png) | ![Search by number](Pokedex/Screenshots/searchByNumber.png) |
+| ![Search by name](Pokedex/Screenshots/5_SearchByName.png) | ![Search by number](Pokedex/Screenshots/6_SearchByNumber.png) |
 
 
 
 | Detail Screen                                | Stats and evolution screen                                |
 | -------------------------------------- | ------------------------------------------- |
-| ![Detail Screen](Pokedex/Screenshots/DetailScreen.png) | ![Stats and evolution screen](https://github.com/ankit-ios/SwiftUI-Pokedex/blob/9ada6495e5d850666884e36b8b81de1107c41de1/Pokedex/Screenshots/Stats%20and%20evolution%20screen.png) |
+| ![Detail Screen](Pokedex/Screenshots/7_DetailScreen.png) | ![Stats and evolution screen](Pokedex/Screenshots/8_StatsAndEvolutionScreen.png) |
 
 
 | Read more                                |
 | -------------------------------------- |
-| ![Read more](https://github.com/ankit-ios/SwiftUI-Pokedex/blob/b6bde2695ac5b1ff6fcc790fa74ec4447a2ec1cd/Pokedex/Screenshots/ReadMore%20screen.png) |
+| ![Read more](Pokedex/Screenshots/9_ReadMoreScreen.png) |
 
 
 
 | Filter Screen                                | Filter by gender                                |
 | -------------------------------------- | ------------------------------------------- |
-| ![Filter Screen](Pokedex/Screenshots/FilterScreen.png) | ![Filter by gender](Pokedex/Screenshots/FilterGender.png) |
+| ![Filter Screen](Pokedex/Screenshots/10_FilterScreen.png) | ![Filter by gender](Pokedex/Screenshots/11_FilterGender.png) |
 
 
 | Filter by type                                |
 | -------------------------------------- |
-| ![Filter by type](https://github.com/ankit-ios/SwiftUI-Pokedex/blob/9ada6495e5d850666884e36b8b81de1107c41de1/Pokedex/Screenshots/FilterType%20screen.png) |
-
+| ![Filter by type](Pokedex/Screenshots/12_FilterTypeScreen.png) |

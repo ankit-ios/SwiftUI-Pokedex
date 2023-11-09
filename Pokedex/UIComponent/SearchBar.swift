@@ -39,7 +39,7 @@ struct SearchBar: View {
         .background(
             RoundedRectangle(cornerRadius: 8)
                 .fill(AppColors.Background.secondary)
-                .shadow(color: .gray.opacity(0.5), radius: 10, x: 0, y: 0)
+                .shadow(color: .gray.opacity(0.5), radius: 10, x: 2, y: 0)
         )
     }
 }

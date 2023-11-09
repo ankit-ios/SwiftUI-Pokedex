@@ -21,32 +21,38 @@ struct AccordionView: View {
     @Binding var checkedItems: [String: Bool]
     
     var body: some View {
-        VStack {
-            DisclosureGroup(isExpanded: $isExpanded.animation(), content: {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 100)), GridItem(.adaptive(minimum: 100))], alignment: .leading, spacing: 20, content: {
-                    ForEach(model.items, id: \.self) { item in
-                        CheckboxView(text: item.capitalized, isChecked: binding(for: item))
+        ZStack {
+            VStack {
+                DisclosureGroup(isExpanded: $isExpanded.animation(), content: {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 100)), GridItem(.adaptive(minimum: 100))], alignment: .leading, spacing: 20, content: {
+                        ForEach(model.items, id: \.self) { item in
+                            CheckboxView(text: item.capitalized, isChecked: binding(for: item))
+                        }
+                    })
+                }, label: {
+                    HStack {
+                        Text(model.title)
+                            .font(AppFont.subtitle)
+                            .foregroundColor(AppColors.Text.primary)
+                            .frame(width: 100)
+                        
+                        Divider()
+                            .background(AppColors.Text.primary)
+                            .frame(width: 2)
+                        
+                        Text(getTitleDetail().capitalized)
+                            .font(AppFont.caption)
+                            .foregroundColor(AppColors.Text.primary)
+                            .padding(.leading, 10)
                     }
                 })
-            }, label: {
-                HStack {
-                    Text(model.title)
-                        .font(.headline)
-                        .fontWeight(.bold)
-                        .frame(width: 100)
-                    
-                    Divider()
-                        .background(.black)
-                        .frame(width: 2)
-                    
-                    Text(getTitleDetail())
-                        .font(.subheadline)
-                        .padding(.leading, 10)
-                }
-            })
-            .padding()
-            .disclosureGroupStyle(CustomDisclosureGroupStyle(image: isExpanded ? AppImages.collapse : AppImages.expand))
-        }.background(RoundedRectangle(cornerRadius: 8).stroke(.black.opacity(0.5), lineWidth: 1))
+                .disclosureGroupStyle(CustomDisclosureGroupStyle(image: isExpanded ? AppImages.collapse : AppImages.expand))
+                .padding()
+            }
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(AppColors.Text.primary, lineWidth: 2)
+        }
+        .padding(.all, 2)
     }
     
     private func binding(for item: String) -> Binding<Bool> {

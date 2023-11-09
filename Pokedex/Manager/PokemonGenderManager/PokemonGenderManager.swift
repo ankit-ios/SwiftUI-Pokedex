@@ -40,11 +40,12 @@ class PokemonGenderManager {
 }
 
 extension PokemonGenderManager {
-    func getGender(for pokemanName: String) -> String {
-        if let foundGender = genderDataSource.first(where: { $0.value.contains(pokemanName) }) {
-            return foundGender.key.rawValue
+    func getGenders(for pokemanName: String) -> [String] {
+        let foundGenders = genderDataSource.filter({ $0.value.contains(pokemanName) })
+        if !foundGenders.isEmpty {
+            return foundGenders.map { $0.key.rawValue }
         } else {
-            return PokemonGender.genderless.rawValue
+            return [PokemonGender.genderless.rawValue]
         }
     }
 }
