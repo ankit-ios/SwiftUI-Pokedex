@@ -43,8 +43,8 @@ extension APIRequest {
         request.allHTTPHeaderFields = additionalHeader
         
         //adding body
-        if method == .post, let body = body {
-            request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+        if method == .post, let body1 = body {
+            request.httpBody = try? JSONSerialization.data(withJSONObject: body1)
         }
                 
         return request
